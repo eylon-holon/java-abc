@@ -155,8 +155,3 @@ def store_all_changes_to_github():
 def get_next_lesson():
     os_cmd("git pull origin main")
     os_cmd("git push")
-
-def install_java_kernel():
-    os_cmd("cd .ijava-kernel")
-    os_cmd("python -m install --user")
-
