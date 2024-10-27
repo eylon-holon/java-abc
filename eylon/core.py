@@ -88,6 +88,18 @@ def start(desc):
     post_results("Here😁", "", "")
     print(f"Hi {work.branch} 😁! Let's start the lesson... 🙌")
 
+def start_from(notebook, desc):
+    global work
+    work = ClassWork(notebook, desc)
+    post_results("Here😁", "", "")
+    print(f"Hi {work.branch} 😁! Let's start the lesson... 🙌")
+
+def post_to_log(notebook, fname):
+    global work
+    work = ClassWork(notebook, [])
+    post_results(fname, "", "")
+    print(f"Hi {work.branch}. '{fname}' is posted.")
+
     
 def submit(func):
     fn = fname(func)
