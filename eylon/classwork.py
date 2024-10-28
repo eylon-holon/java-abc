@@ -1,5 +1,5 @@
 import io
-from eylon.utils import *
+from .utils import *
 
 class ClassWork:
     def __init__(self, notebook, desc):

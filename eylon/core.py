@@ -3,10 +3,10 @@ import datetime
 import inspect
 import json
 
-from eylon.utils import *
-from eylon.post import post
-from eylon.classwork import ClassWork
-from config import cfg
+from .utils import *
+from .post import post
+from .classwork import ClassWork
+from .config import cfg
 
 
 work = None
