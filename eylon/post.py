@@ -1,5 +1,5 @@
-from urllib.request import Request, urlopen
 import json
+from urllib.request import Request, urlopen
 
 def post(url, data):
     payload = json.dumps(data)
