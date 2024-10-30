@@ -3,10 +3,10 @@ import datetime
 import inspect
 import json
 
-from eylon.utils import *
-from eylon.post import post
-from eylon.classwork import ClassWork
-from config import cfg
+from .utils import *
+from .post import post
+from .classwork import ClassWork
+from .config import cfg
 
 
 work = None
@@ -153,5 +153,4 @@ def store_all_changes_to_github():
 
 
 def get_next_lesson():
-    os_cmd("git pull origin main")
-    os_cmd("git push")
+    os_cmd("git pull origin main --no-ff --no-edit && git push")
