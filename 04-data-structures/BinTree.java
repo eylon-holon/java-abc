@@ -1,5 +1,5 @@
 class BinTree {
-    public static BinNode build(String name) {
+    public static BinNode buildTestTree() {
         return new BinNode(2,
             new BinNode(1,
                 new BinNode(4,
@@ -19,6 +19,10 @@ class BinTree {
                 )
             )
         );
+    }
+
+    public static BinNode buildFromMermaid(String file, String name) {
+        return null;
     }
 
     public static boolean hasValue2(BinNode node, int value) {
