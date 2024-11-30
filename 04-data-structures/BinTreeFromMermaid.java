@@ -11,9 +11,11 @@ class BinTreeFromMermaid {
     private static String[] readAllLinesFrom(String filePath) {
         System.out.print(String.format("Reading from '%s' ... ", filePath));
         String text = "";
+
         try {
             text = Files.readString(Path.of(filePath));
-        } catch (NoSuchFileException ex) {
+        }
+        catch (NoSuchFileException ex) {
             System.out.println(String.format("can't find the file", filePath));
         }
         catch (IOException ex) {
@@ -38,19 +40,27 @@ class BinTreeFromMermaid {
                 graph.clear();
                 continue;
             }
+
             if (ln.startsWith("%%")) {
                 var pair = ln.substring(2).trim().split(":");
+
                 if (pair.length != 2)
                     continue;
+
                 var argName = pair[0].trim();
                 var value = pair[1].trim();
+
                 if (!argName.toLowerCase().equals("graphname"))
                     continue;
+
                 if (!value.toLowerCase().equals(graphName.toLowerCase()))
                     continue;
+
                 System.out.println(String.format("%d lines", graph.size()));
+
                 return graph.toArray(new String[graph.size()]);
             }
+
             graph.add(ln);
         }
 
@@ -109,6 +119,7 @@ class BinTreeFromMermaid {
 
         public void nextNode(String ln) {
             var parts = ln.split("---");
+
             if (parts.length != 2)
                 return;
             
@@ -119,6 +130,7 @@ class BinTreeFromMermaid {
 
         public void nextNull(String ln) {
             var parts = ln.split("~~~");
+
             if (parts.length != 2)
                 return;
             
@@ -183,6 +195,8 @@ class BinTreeFromMermaid {
     public static BinNode buildFromMermaid(String graphName, String filePath) {
         var lines = readAllLinesFrom(filePath);
         var graph = getGraphLines(graphName, lines);
-        return parseLines(graph);
+        var tree = parseLines(graph);
+
+        return tree;
     }
 }
