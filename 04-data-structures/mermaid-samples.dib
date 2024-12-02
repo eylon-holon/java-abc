@@ -1,0 +1,71 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"languageName":"csharp","name":"csharp"}]}}
+
+#!mermaid
+
+graph TB;
+A1((2))---B1((1))
+A1---B2((3))
+
+#!mermaid
+
+graph TB;
+A1((1))---B1((2))
+A1~~~x1:::x
+B1~~~x2:::x
+B1---C((3))
+classDef x display: none;    
+
+#!mermaid
+
+graph TB
+    A((1))---B((2))
+    A---C((3))
+    A---D((4))
+    B---E((5))
+    B---F((6))
+    B---G((7))
+    C---H((8))
+    D---I((9))
+    D---J((10))
+
+#!mermaid
+
+graph TB;
+A1((18))---B1((17))
+A1---B2((15))
+B1---C1((13))
+B1---C2((12))
+B2~~~x1:::x
+B2---C3((14))
+C1---D1((11))
+C1~~~x2:::x
+C2---D2((23))
+C2---D3((10))
+C3---D4((19))
+C3---D5((12))
+D3---E1((16))
+D3~~~x3:::x
+
+classDef x display: none;    
+
+#!mermaid
+
+graph TB;
+Main("Find 6 In-Order")
+Main--Eyal---A1((2))
+A1--Yona---B1((1))
+A1--Lian---B2((3))
+B1--Orin---C1((4))
+B1--Alon---C2((5))
+B2~~~x1:::x
+B2--Gal---C3((6))
+C1--Yona---D1((7))
+C1~~~x2:::x
+C2~~~x3:::x
+C2--Carmel---D3((8))
+C3--Hila---D4((9))
+C3---D5((10))
+
+classDef x display: none;
