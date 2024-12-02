@@ -21,26 +21,6 @@ class BinTree {
         );
     }
 
-    public static BinNode buildFromMermaid(String file, String name) {
-        return null;
-    }
-
-    public static boolean hasValue2(BinNode node, int value) {
-        if (node == null) {
-            return false;
-        }
-
-        var containsLeft = hasValue(node.getLeft(), value);
-
-        if (containsLeft) {
-            return true;
-        }
-
-        var containsRight = hasValue(node.getRight(), value);
-
-        return containsRight;
-    }
-
     public static boolean hasValue(BinNode node, int value) {
         if (node == null) {
             return false;
@@ -56,15 +36,15 @@ class BinTree {
     }
 
 
-    public static void print(BinNode node) {
+    public static void print3(BinNode node) {
         if (node == null) {
             return;
         }
 
         System.out.println(node);
 
-        print(node.getLeft());
-        print(node.getRight());
+        print3(node.getLeft());
+        print3(node.getRight());
     }
 
     public static int sumPreOrder(BinNode node) {
