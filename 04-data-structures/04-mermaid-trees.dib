@@ -5,5 +5,8 @@
 #!mermaid
 
 graph TB;
-A1((2))---B1((1))
-A1---B2((3))
+A1((1))---B1((2))
+A1~~~x1:::x
+B1~~~x2:::x
+B1---C1((3))
+classDef x display: none; 
