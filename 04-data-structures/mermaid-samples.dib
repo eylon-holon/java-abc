@@ -73,3 +73,37 @@ graph TB;
 A1((2))---(B1((1))
 A1---B2((3))
 B2---C1((4))
+
+#!mermaid
+
+graph TB;
+A1((7))---B1((7))
+A1---B2((7))
+B1---C1((7))
+B1---C2((7))
+
+classDef x display: none;
+%% graphName: seven
+
+#!mermaid
+
+graph TB;
+A1((19))---B1((17))
+A1---B2((15))
+B1---C1((13))
+B1---C2((12))
+B2~~~x1:::x
+B2---C3((14))
+C1---D1((11))
+C1~~~x2:::x
+C2---D2((23))
+C2---D3((10))
+C3---D4((21))
+C3---D5((12))
+D3---E1((16))
+D3~~~x3:::x
+D4~~~x4:::x
+D4---E2((22))
+
+classDef x display: none;
+%% graphName: my-presentation2
