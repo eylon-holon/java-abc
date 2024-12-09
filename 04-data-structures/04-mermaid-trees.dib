@@ -16,4 +16,30 @@ A1~~~x1:::x
 B1~~~x2:::x
 B1---C1((3))
 
-classDef x display: none;   
+classDef x display: none;  
+%% graphName: tree2
+
+#!mermaid
+
+graph TB;
+A1((19))---B1((17))
+A1---B2((15))
+B1---C1((13))
+B1---C2((12))
+B2~~~x1:::x
+B2---C3((14))
+C1---D1((11))
+C1~~~x2:::x
+C2---D2((23))
+C2---D3((10))
+C3---D4((21))
+C3---D5((12))
+D1---E2((45))
+D1~~~x5:::x
+D2~~~x3:::x
+D2---E1((27))
+D4~~~x4:::x
+D4---E3((22))
+
+classDef x display: none;
+%% graphName: my-tree
