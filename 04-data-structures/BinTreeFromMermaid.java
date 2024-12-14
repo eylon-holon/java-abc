@@ -8,15 +8,15 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 class BinTreeFromMermaid {
-    private static String[] readAllLinesFrom(String filePath) {
-        System.out.print(String.format("Reading from '%s' ... ", filePath));
+    private static String[] readAllLinesFrom(String filePath, boolean log) {
+        if (log) System.out.print(String.format("Reading from '%s' ... ", filePath));
         String text = "";
 
         try {
             text = Files.readString(Path.of(filePath));
         }
         catch (NoSuchFileException ex) {
-            System.out.println(String.format("can't find the file", filePath));
+            System.out.println(String.format("Can't find file '%s'", filePath));
         }
         catch (IOException ex) {
             System.out.println(String.format("Failed to read from '%s'", filePath));
@@ -24,13 +24,13 @@ class BinTreeFromMermaid {
         }
 
         var lines = text.split("[\\r\\n]+");
-        System.out.println(String.format("%d lines", lines.length));
+        if (log) System.out.println(String.format("%d lines", lines.length));
 
        return lines;
     }
 
-    private static String[] getGraphLines(String graphName, String[] lines) {
-        System.out.print(String.format("Looking for '%s: %s' ... ", "graphName", graphName));
+    private static String[] getGraphLines(String graphName, String[] lines, boolean log) {
+        if (log) System.out.print(String.format("Looking for '%s: %s' ... ", "graphName", graphName));
         var graph = new ArrayList<String>();
 
         for (var ln : lines) {
@@ -56,7 +56,7 @@ class BinTreeFromMermaid {
                 if (!value.toLowerCase().equals(graphName.toLowerCase()))
                     continue;
 
-                System.out.println(String.format("%d lines", graph.size()));
+                if (log) System.out.println(String.format("%d lines", graph.size()));
 
                 return graph.toArray(new String[graph.size()]);
             }
@@ -64,7 +64,7 @@ class BinTreeFromMermaid {
             graph.add(ln);
         }
 
-        System.out.println("not found");
+        System.out.println(String.format("Graph '%s' is not found", graphName));
         System.out.println(String.format("Please add '%%%% graphName: %s' as a last line to your mermaid graph", graphName));
 
         return new String[0];
@@ -174,7 +174,7 @@ class BinTreeFromMermaid {
         }
     }
 
-    public static BinNode parseLines(String[] lines) {
+    private static BinNode parseLines(String[] lines, boolean log) {
         if (lines.length == 0)
             return null;
 
@@ -192,10 +192,11 @@ class BinTreeFromMermaid {
         return parser.toBinTree();
     }
 
-    public static BinNode buildFromMermaid(String graphName, String filePath) {
-        var lines = readAllLinesFrom(filePath);
-        var graph = getGraphLines(graphName, lines);
-        var tree = parseLines(graph);
+    public static BinNode buildFromMermaid(String graphName, String filePath, boolean... logFlags) {
+        var log = logFlags.length > 0 && logFlags[0];
+        var lines = readAllLinesFrom(filePath, log);
+        var graph = getGraphLines(graphName, lines, log);
+        var tree = parseLines(graph, log);
 
         return tree;
     }
