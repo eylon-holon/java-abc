@@ -10,6 +10,14 @@ A1---B2((3))
 
 #!mermaid
 
+graph TB;
+    A1((1))---B1((1))
+    A1---B2((1))
+    B2---C1((1))
+%% graphName: dadada
+
+#!mermaid
+
 graph TB
     A((1))---B((2))
     A---C((3))
