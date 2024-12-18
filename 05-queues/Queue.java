@@ -16,10 +16,12 @@ class Queue {
     }
 
     public void insert(int value) {
-        tail.next = new Node(value, tail);
+        var node = new Node(value, tail);
         if (head == null) {
-            head = tail;
+            head = node;
+            tail = node;
         }
+        tail.setNext(node);
     }
 
     public int remove() {
