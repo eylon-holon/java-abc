@@ -1,5 +1,5 @@
 class FsmFromMermaid {
-    public static FSM parse(String name, String file) {
+    public static FSM fsm_101() {
         var q0 = new FSM.State(0, "q0", false);
         var q1 = new FSM.State(1, "q1", false);
         var q2 = new FSM.State(2, "q2", true);
@@ -14,8 +14,12 @@ class FsmFromMermaid {
             new FSM.Rule[] {r0, r1, r2}
         );
 
-        var fsm = new FSM(name, def);
+        var fsm = new FSM("101", def);
 
         return fsm;
+    }    
+
+    public static FSM parse(String name, String file) {
+        return null;
     }    
 }

@@ -53,12 +53,17 @@ class FSM {
         this.name = name;
         this.def = def;
 
+        // initalize alef-bet
+
         ch2at = new int[Character.MAX_VALUE];
+
         for (int at = 0; at < def.alefBet.length; at++) {
             var ch = def.alefBet[at];
             ch2at[ch] = at;
             if (traceInit) print("ch2at['%s'] = %d  ==>  ch2at[%d] = %d", ch, at, (int) ch, at);
         }
+
+        // initialize transition table
 
         fsm = new int[def.states.length][def.alefBet.length];
 
@@ -78,8 +83,12 @@ class FSM {
     }
 
     private int error(State in, String msg) {
-        System.out.println(String.format("ERROR in %s: %s", in.name, msg));
+        print("ERROR in %s: %s", in.name, msg);
         return -1;
+    }
+
+    private void traceTransition(State from, State to, int at) {
+        print("  '%s': %s --> %s", def.alefBet[at], from.name, to.name);
     }
 
     private int getAt(char ch) {
@@ -89,10 +98,6 @@ class FSM {
                 return i;
         }
         return -1;
-    }
-
-    private void traceTransition(State from, State to, int at) {
-        print("  '%s': %s --> %s", def.alefBet[at], from.name, to.name);
     }
 
     private int next(char ch, boolean trace) {
@@ -121,8 +126,10 @@ class FSM {
             print("FSM['%s']: accepting word '%s'", name, word);
 
         current = 0;
+
         for (var ch: word.toCharArray()) {
             current = next(ch, trace);
+            
             if (current == -1)
                 return false;
         }
