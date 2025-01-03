@@ -37,13 +37,14 @@ class FSM {
         }
     }
 
-    private String name;
-    private Def def;
-    private int[] ch2at;
-    private int[][] fsm;
+    private final String name;
+    private final Def def;
+    private final int[] ch2at;
+    private final int[][] fsm;
+
     private int current;
 
-    private boolean traceInit = false;
+    private static final boolean traceInit = false;
 
     private void print(String fmt, Object... args) {
         System.out.println(String.format(fmt, args));
@@ -60,30 +61,35 @@ class FSM {
         for (int at = 0; at < def.alefBet.length; at++) {
             var ch = def.alefBet[at];
             ch2at[ch] = at;
-            if (traceInit) print("ch2at['%s'] = %d  ==>  ch2at[%d] = %d", ch, at, (int) ch, at);
+
+            if (traceInit)
+                print("ch2at['%s'] = %d  ==>  ch2at[%d] = %d", ch, at, (int) ch, at);
         }
 
         // initialize transition table
 
         fsm = new int[def.states.length][def.alefBet.length];
 
-        for (var ln: fsm)
+        for (var ln: fsm) {
             Arrays.fill(ln, -1);
+        }
 
         for (var rule: def.rules) {
             int from = rule.from.id;
             int to = rule.to.id;
+
             for (var ch: rule.chars) {
                 var at = ch2at[ch];
                 fsm[from][at] = to;
-                if (traceInit) print("fsm[%s]['%s'] = %s  ==>  fsm[%d][%d] = %d",
-                    rule.from.name, ch, rule.to.name, from, at, to);
+
+                if (traceInit)
+                    print("fsm[%s]['%s'] = %s  ==>  fsm[%d][%d] = %d", rule.from.name, ch, rule.to.name, from, at, to);
             }
         }
     }
 
-    private int error(State in, String msg) {
-        print("ERROR in %s: %s", in.name, msg);
+    private int error(State in, String errMsg) {
+        print("ERROR in %s: %s", in.name, errMsg);
         return -1;
     }
 
@@ -129,7 +135,7 @@ class FSM {
 
         for (var ch: word.toCharArray()) {
             current = next(ch, trace);
-            
+
             if (current == -1)
                 return false;
         }
@@ -144,6 +150,16 @@ class FSM {
 
     public boolean accept(String word) {
         return accept(word, false);
+    }
+
+    public boolean[] accept(String... words) {
+        var result = new boolean[words.length];
+
+        for (int i = 0; i < words.length; i++) {
+            result[i] = accept(words[i], false);
+        }
+
+        return result;
     }
 
     @Override
