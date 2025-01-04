@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.nio.file.*;
+
 class FsmFromMermaid {
     public static FSM fsm_101() {
         var q0 = new FSM.State(0, "q0", false);
@@ -19,7 +22,18 @@ class FsmFromMermaid {
         return fsm;
     }    
 
-    public static FSM parse(String name, String file) {
-        return null;
+    public static FSM parse(String graphName, String filePath, boolean... logFlags) {
+        var log = logFlags.length > 0 && logFlags[0];
+
+        var graph = MermaidFile.readGraphLines(graphName, filePath, log);
+        var parser = new FsmParser(graph, log);
+
+        var def = new FSM.Def(
+            parser.getStates(),
+            parser.getAlefBet(),
+            parser.getRules()
+        );
+
+        return new FSM(graphName, def);
     }    
 }
