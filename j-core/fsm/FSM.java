@@ -158,7 +158,7 @@ class FSM {
         return _notCompletedStates.length == 0;
     }
 
-    public String[] get_notCompletedStates() {
+    public String[] getNotCompletedStates() {
         return _notCompletedStates;
     }
 
