@@ -2,10 +2,6 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 class FsmParser {
-    private static void print(String fmt, Object... args) {
-        System.out.println(String.format(fmt, args));
-    }
-
     private List<FSM.State> states = new ArrayList<>();
     private Set<Character> alefBet = new HashSet<>();
     private List<FSM.Rule> rules = new ArrayList<>();
@@ -27,17 +23,21 @@ class FsmParser {
         return rules.toArray(FSM.Rule[]::new);
     }
 
+    private static void print(String fmt, Object... args) {
+        System.out.println(String.format(fmt, args));
+    }
+
     private static String removeSpaces(String ln) {
         return ln.replaceAll("\\s","");
     }
 
-    private boolean itsState(String ln) {
+    private boolean itsAStateLine(String ln) {
         ln = removeSpaces(ln);
         return
             ln.contains("((") && ln.contains("))");
     }
 
-    private boolean itsRule(String ln) {
+    private boolean itsARuleLine(String ln) {
         ln = removeSpaces(ln);
 
         var hasArrow = 
@@ -175,10 +175,10 @@ class FsmParser {
 
     public FsmParser(String[] graph, boolean log) {
         for (var ln: graph) {
-            if (itsState(ln))
+            if (itsAStateLine(ln))
                 parseStates(ln, log);
             else
-            if (itsRule(ln))
+            if (itsARuleLine(ln))
                 parseRule(ln, log);
         }
     }    

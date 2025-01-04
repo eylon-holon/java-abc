@@ -1,6 +1,3 @@
-import java.io.IOException;
-import java.nio.file.*;
-
 class FsmFromMermaid {
     public static FSM fsm_101() {
         var q0 = new FSM.State(0, "q0", false);
@@ -37,3 +34,5 @@ class FsmFromMermaid {
         return new FSM(graphName, def);
     }    
 }
+
+// https://stackoverflow.com/questions/67680483/getting-error-file-cannot-be-resolved-to-a-type-for-java-in-visual-studio-code

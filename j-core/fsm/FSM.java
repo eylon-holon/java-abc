@@ -1,7 +1,5 @@
 import java.util.Arrays;
 
-// https://stackoverflow.com/questions/67680483/getting-error-file-cannot-be-resolved-to-a-type-for-java-in-visual-studio-code
-
 class FSM {
     public static class State {
         public int id;
