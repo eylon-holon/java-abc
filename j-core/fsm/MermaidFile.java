@@ -89,7 +89,7 @@ class MermaidFile {
         }
 
         var namesInFile = Arrays.toString(namesFound.toArray());
-        print("%s: '%s' is not found in %s", filePath, graphName, namesInFile);
+        print("%s: '%s' is not found; (found graphs: %s)", filePath, graphName, namesInFile);
 
         return new String[0];
     }

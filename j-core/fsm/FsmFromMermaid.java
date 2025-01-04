@@ -35,4 +35,5 @@ class FsmFromMermaid {
     }    
 }
 
+// Ctrl+Shift+P(Command Pallete) -> Clean Java server language workspace-> Restart and delete
 // https://stackoverflow.com/questions/67680483/getting-error-file-cannot-be-resolved-to-a-type-for-java-in-visual-studio-code

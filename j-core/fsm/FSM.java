@@ -37,12 +37,13 @@ class FSM {
         }
     }
 
-    private final String name;
-    private final Def def;
-    private final int[] ch2at;
-    private final int[][] fsm;
+    private final String _name;
+    private final Def _def;
+    private final int[] _ch2at;
+    private final int[][] _fsm;
 
-    private final String[] notCompletedStates;
+    private final boolean _hasNoStates;
+    private final String[] _notCompletedStates;
 
     private int current;
 
@@ -51,16 +52,16 @@ class FSM {
     }
 
     public FSM(String name, Def def, boolean traceInit) {
-        this.name = name;
-        this.def = def;
+        _name = name;
+        _def = def;
 
         // initalize alef-bet
 
-        ch2at = new int[Character.MAX_VALUE];
+        _ch2at = new int[Character.MAX_VALUE];
 
         for (int at = 0; at < def.alefBet.length; at++) {
             var ch = def.alefBet[at];
-            ch2at[ch] = at;
+            _ch2at[ch] = at;
 
             if (traceInit)
                 print("ch2at['%s'] = %d  ==>  ch2at[%d] = %d", ch, at, (int) ch, at);
@@ -68,9 +69,9 @@ class FSM {
 
         // initialize transition table
 
-        fsm = new int[def.states.length][def.alefBet.length];
+        _fsm = new int[def.states.length][def.alefBet.length];
 
-        for (var ln: fsm) {
+        for (var ln: _fsm) {
             Arrays.fill(ln, -1);
         }
 
@@ -79,8 +80,8 @@ class FSM {
             int to = rule.to.id;
 
             for (var ch: rule.chars) {
-                var at = ch2at[ch];
-                fsm[from][at] = to;
+                var at = _ch2at[ch];
+                _fsm[from][at] = to;
 
                 if (traceInit)
                     print("fsm[%s]['%s'] = %s  ==>  fsm[%d][%d] = %d", rule.from.name, ch, rule.to.name, from, at, to);
@@ -89,10 +90,12 @@ class FSM {
 
         // initialize not completed states
 
+        _hasNoStates = _def.states.length == 0;
+
         var notCompletedNames = new ArrayList<String>();
 
-        for (int lnNo = 0; lnNo < fsm.length; lnNo++) {
-            var ln = fsm[lnNo];
+        for (int lnNo = 0; lnNo < _fsm.length; lnNo++) {
+            var ln = _fsm[lnNo];
 
             var completed = true;
             for (var target: ln) {
@@ -109,7 +112,7 @@ class FSM {
             }
         }
 
-        notCompletedStates = notCompletedNames.toArray(String[]::new);
+        _notCompletedStates = notCompletedNames.toArray(String[]::new);
     }
 
     private int error(State in, String errMsg) {
@@ -118,11 +121,11 @@ class FSM {
     }
 
     private void traceTransition(State from, State to, int at) {
-        print("  '%s': %s --> %s", def.alefBet[at], from.name, to.name);
+        print("  '%s': %s --> %s", _def.alefBet[at], from.name, to.name);
     }
 
     private int getAt(char ch) {
-        var chars = def.alefBet;
+        var chars = _def.alefBet;
         for (int i = 0; i < chars.length; i++) {
             if (ch == chars[i])
                 return i;
@@ -131,18 +134,18 @@ class FSM {
     }
 
     private int next(char ch, boolean trace) {
-        var from = def.states[current];
+        var from = _def.states[current];
         assert from != null;
 
         var at = getAt(ch);
         if (at == -1)
             return error(from, String.format("Undefined transition '%s'", ch));
 
-        var next = fsm[current][at];
+        var next = _fsm[current][at];
         if (next == -1)
             return error(from, String.format("No transition for '%s' is defined", ch));
 
-        var to = def.states[next];
+        var to = _def.states[next];
         assert to != null;
 
         if (trace)
@@ -152,16 +155,21 @@ class FSM {
     }
 
     public boolean isComplete() {
-        return notCompletedStates.length == 0;
+        return _notCompletedStates.length == 0;
     }
 
-    public String[] getNotCompletedStates() {
-        return notCompletedStates;
+    public String[] get_notCompletedStates() {
+        return _notCompletedStates;
     }
 
     public boolean accept(String word, boolean trace) {
         if (trace)
-            print("FSM['%s']: accepting word '%s'", name, word);
+            print("FSM['%s']: accepting word '%s'", _name, word);
+
+        if (_hasNoStates) {
+            print("FSM['%s']: I have no states", _name);
+            return false;
+        }
 
         current = 0;
 
@@ -172,10 +180,10 @@ class FSM {
                 return false;
         }
 
-        var ok = def.states[current].ok;
+        var ok = _def.states[current].ok;
 
         if (trace)
-            print("FSM['%s']: '%s' is %s", name, word, ok ? "accepted" : "wrong");
+            print("FSM['%s']: '%s' is %s", _name, word, ok ? "accepted" : "wrong");
 
         return ok;
     }
@@ -184,11 +192,11 @@ class FSM {
         return accept(word, false);
     }
 
-    public boolean[] accept(String... words) {
-        var result = new boolean[words.length];
+    public boolean[] accept(String... many) {
+        var result = new boolean[many.length];
 
-        for (int i = 0; i < words.length; i++) {
-            result[i] = accept(words[i], false);
+        for (int i = 0; i < many.length; i++) {
+            result[i] = accept(many[i], false);
         }
 
         return result;
@@ -200,39 +208,39 @@ class FSM {
 
         sb
             .append(String.format(
-            "FSM['%s', %d, %d, %d]", name, def.states.length, def.alefBet.length, def.rules.length))
+            "FSM['%s', %d, %d, %d]", _name, _def.states.length, _def.alefBet.length, _def.rules.length))
             .append("\n");
 
         sb
             .append("  states:  [")
             .append(String.join(", ", Arrays
-                .stream(def.states)
+                .stream(_def.states)
                 .map(st -> String.format("%s(%d)", st.name, st.id))
                 .toList()))
             .append("]\n");
 
         sb
             .append("  alefBet: ")
-            .append(Arrays.toString(def.alefBet))
+            .append(Arrays.toString(_def.alefBet))
             .append("\n");
 
         sb.append("  rules:  [\n");
-        for (var rule: def.rules) {
+        for (var rule: _def.rules) {
             sb.append(String.format("    %s -%s-> %s\n",
                 rule.from.name, Arrays.toString(rule.chars), rule.to.name));
         }
         sb.append("  ]\n");
 
         sb.append("  fsm:  [\n");
-        for (int ln = 0; ln < fsm.length; ln++) {
-            sb.append(String.format("    %s [", def.states[ln].name));
+        for (int ln = 0; ln < _fsm.length; ln++) {
+            sb.append(String.format("    %s [", _def.states[ln].name));
             var first = true;
-            for (int at = 0; at < fsm[ln].length; at++) {
+            for (int at = 0; at < _fsm[ln].length; at++) {
                 if (!first)
                     sb.append(", ");
-                var target = fsm[ln][at] >= 0 ? def.states[fsm[ln][at]].name : "XX";
+                var target = _fsm[ln][at] >= 0 ? _def.states[_fsm[ln][at]].name : "XX";
                 sb.append(String.format("'%s'-> %s", 
-                    def.alefBet[at], target));
+                    _def.alefBet[at], target));
                 first = false;
             }
             sb.append("]\n");
