@@ -14,7 +14,7 @@ class FsmFromMermaid {
             new FSM.Rule[] {r0, r1, r2}
         );
 
-        var fsm = new FSM("101", def);
+        var fsm = new FSM("101", def, false);
 
         return fsm;
     }    
@@ -31,7 +31,7 @@ class FsmFromMermaid {
             parser.getRules()
         );
 
-        return new FSM(graphName, def);
+        return new FSM(graphName, def, log);
     }    
 }
 

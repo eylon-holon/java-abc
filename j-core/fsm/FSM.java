@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*;
 
 class FSM {
     public static class State {
@@ -42,15 +42,15 @@ class FSM {
     private final int[] ch2at;
     private final int[][] fsm;
 
-    private int current;
+    private final String[] notCompletedStates;
 
-    private static final boolean traceInit = false;
+    private int current;
 
     private void print(String fmt, Object... args) {
         System.out.println(String.format(fmt, args));
     }
 
-    public FSM(String name, Def def) {
+    public FSM(String name, Def def, boolean traceInit) {
         this.name = name;
         this.def = def;
 
@@ -86,6 +86,30 @@ class FSM {
                     print("fsm[%s]['%s'] = %s  ==>  fsm[%d][%d] = %d", rule.from.name, ch, rule.to.name, from, at, to);
             }
         }
+
+        // initialize not completed states
+
+        var notCompletedNames = new ArrayList<String>();
+
+        for (int lnNo = 0; lnNo < fsm.length; lnNo++) {
+            var ln = fsm[lnNo];
+
+            var completed = true;
+            for (var target: ln) {
+                completed &= target >= 0;
+            }
+
+            if (!completed) {
+                var notCompleted = def.states[lnNo].name;
+
+                if (traceInit)
+                    print("state '%s' is not complete", notCompleted);
+
+                notCompletedNames.add(notCompleted);
+            }
+        }
+
+        notCompletedStates = notCompletedNames.toArray(String[]::new);
     }
 
     private int error(State in, String errMsg) {
@@ -125,6 +149,14 @@ class FSM {
             traceTransition(from, to, at);
 
         return next;
+    }
+
+    public boolean isComplete() {
+        return notCompletedStates.length == 0;
+    }
+
+    public String[] getNotCompletedStates() {
+        return notCompletedStates;
     }
 
     public boolean accept(String word, boolean trace) {
