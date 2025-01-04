@@ -71,8 +71,46 @@ n3 -->|1,2,3,4| W
 %% O -->|1,2,3,4| O
 %% W -->|1,2,3,4| W
 
-O & W -.->|#| q0
+%% O & W -.->|#| q0
 %% q1 & q2 & q3 & n1 & n2 & n3 -.->|#| q0
+
+classDef start color:red
+classDef ok color:green
+
+#!mermaid
+
+---
+title: door-lock-complete
+---
+graph LR
+
+q0((q0)):::start; 
+O(((Open))):::ok; W((Wrong));
+q1((q1)); q2((q2)); q3((q3));
+n1((n1)); n2((n2)); n3((n3));
+
+q0 ==>|4| q1
+q0 -->|1,2,3| n1
+q0 -.->|#| q0
+
+q1 ==>|1| q2
+q1 -->|2,3,4| n2
+
+q2 ==>|3| q3
+q2 -->|1,2,4| n3
+
+q3 ==>|2| O
+q3 -->|1,3,4| W
+
+n1 -->|1,2,3,4| n2
+n2 -->|1,2,3,4| n3
+n3 -->|1,2,3,4| W
+
+O -->|1,2,3,4| O
+W -->|1,2,3,4| W
+
+O & W -.->|#| q0
+q1 & q2 & q3 & n1 & n2 & n3 -.->|#| q0
 
 classDef start color:red
 classDef ok color:green

@@ -111,17 +111,26 @@ class FsmParser {
         return null;
     }
 
-    private FSM.State parseFromState(String ln) {
-        var name = ln.contains("-") ? 
+    private FSM.State[] parseFromStates(String ln) {
+        var lhs = ln.contains("-") ? 
             ln.split("-")[0] : 
             ln.split("=")[0];
 
-        var state = getState(name);
+        var names = lhs.split("&");
+        var states = new ArrayList<FSM.State>();
 
-        if (state == null)
-            print("ERROR: rule '%s': from state '%s' is not defined", ln, name);
+        for (var name: names) {
+            var state = getState(name);
 
-        return state;
+            if (state == null) {
+                print("ERROR: rule '%s': from state '%s' is not defined", ln, name);
+                continue;
+            }
+
+            states.add(state);
+        }
+
+        return states.toArray(FSM.State[]::new);
     }
 
     private FSM.State parseToState(String ln) {
@@ -160,17 +169,19 @@ class FsmParser {
     private void parseRule(String ln, boolean log) {
         ln = removeSpaces(ln);
 
-        var from = parseFromState(ln);
+        var froms = parseFromStates(ln);
         var to = parseToState(ln);
         var chars = parseTransitions(ln);
 
-        if (from == null || to == null)
+        if (froms.length == 0 || to == null)
             return;
 
-        if (log) print("rule: %s -> %s %s", from.name, to.name, Arrays.toString(chars));
-     
-        var rule = new FSM.Rule(from, to, chars);
-        rules.add(rule);
+        for (var from: froms) {
+            if (log) print("rule: %s -> %s %s", from.name, to.name, Arrays.toString(chars));
+        
+            var rule = new FSM.Rule(from, to, chars);
+            rules.add(rule);
+        }
     }
 
     public FsmParser(String[] graph, boolean log) {
