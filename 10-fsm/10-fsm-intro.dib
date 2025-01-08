@@ -14,9 +14,9 @@ graph LR
 q0((Off)):::start; q1(((On))):::ok;
 
 q0 ==>|1| q1
-q0 -.->|0| q0
+
 q1 ==>|0| q0
-q1 -.->|1| q1
+q1 --->|1| q1
 
 classDef start color:red
 classDef ok color:green
