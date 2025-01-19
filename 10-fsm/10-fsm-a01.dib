@@ -104,7 +104,7 @@ classDef ok color:green
 title: q-08
 ---
 graph LR
-q0(((On))):::ok; q1(((On))):::ok; q2((Off)):::start;
+q0(((On))):::ok; q1(((On))):::ok; q2((Off));
 
 q0 ==>|1| q1
 q0 -.->|0| q0
@@ -121,7 +121,7 @@ classDef ok color:green
 title: q-09
 ---
 graph LR
-q0((Off)):::start; q1(((On))):::ok; q2((Off)):::start;
+q0((Off)):::start; q1(((On))):::ok; q2((Off));
 
 q0 ==>|1| q1
 q0 -.->|0| q0

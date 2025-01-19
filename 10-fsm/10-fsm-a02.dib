@@ -7,57 +7,177 @@
 ---
 title: Alef
 ---
+graph LR
+q0((Off)):::start; q1(((On))):::ok; q2((Off));
+
+q0 ==>|1| q1
+q0 ==>|0| q2
+q1 -.->|0,1| q1
+q2 -.->|0,1| q2
+
+classDef start color:red
+classDef ok color:green
 
 #!mermaid
 
 ---
 title: Bet
 ---
+graph LR
+q0((Off)):::start; q1(((On))):::ok;
+
+q0 ==>|1| q1
+q0 -.->|0| q0
+q1 ==>|0| q0
+q1 -.->|1| q1
+
+classDef start color:red
+classDef ok color:green
 
 #!mermaid
 
 ---
 title: Gimel
 ---
+graph LR
+q0((Off)):::start; q1(((On))):::ok;
+
+q0 ==>|1| q1
+q0 -.->|0| q0
+q1 -.->|0,1| q1
+
+classDef start color:red
+classDef ok color:green
 
 #!mermaid
 
 ---
 title: Daled
 ---
+graph LR
+q0((Off)):::start; q1((Off)); q2((Off)); q3(((On))):::ok;
+
+q0 ==>|1| q1
+q0 ==>|0| q2
+q1 ==>|1| q3
+q1 ==>|0| q2
+q3 -.->|0,1| q3
+q2 -.->|0,1| q2
+
+classDef start color:red
+classDef ok color:green
 
 #!mermaid
 
 ---
 title: Hei
 ---
+graph LR
+q0((Off)):::start; q1((Off)); q2(((On))):::ok;
+
+q0 ==>|1| q1
+q0 -.->|0| q0
+q1 ==>|1| q2
+q1 ==>|0| q0
+q2 ==>|0| q0
+
+classDef start color:red
+classDef ok color:green
 
 #!mermaid
 
 ---
 title: Vav
 ---
+graph LR
+q0((Off)):::start; q1((Off)); q2(((On))):::ok;
+
+q0 ==>|1| q1
+q0 -.->|0| q0
+q1 ==>|1| q2
+q1 ==>|0| q0
+q2 -.->|0,1| q2
+
+classDef start color:red
+classDef ok color:green
 
 #!mermaid
 
 ---
 title: Zain
 ---
+graph LR
+q0(((On))):::ok; q1(((On))):::ok; q2((Off));
+
+q0 ==>|1| q1
+q0 -.->|0| q0
+q1 ==>|1| q2
+q1 ==>|0| q0
+q2 -.->|0,1| q2
+
+classDef start color:red
+classDef ok color:green
 
 #!mermaid
 
 ---
 title: Het
 ---
+graph LR
+q0((Off)):::start; q1((Off)); q2((Off)); q3((Off)); q4((Off)); q5(((On))):::ok;
+
+q0 ==>|1| q2
+q0 ==>|0| q1
+q1 -.->|0,1| q1
+q2 ==>|0| q3
+q2 ==>|1| q1
+q3 ==>|1| q4
+q3 ==>|0| q1
+q4 ==>|1| q5
+q4 ==>|0| q1
+q5 -.->|0,1| q5
+
+classDef start color:red
+classDef ok color:green
 
 #!mermaid
 
 ---
 title: Tet
 ---
+graph LR
+q0((Off)):::start; q1((Off)); q2((Off)); q3((Off)); q4(((On))):::ok;
+
+q0 ==>|1| q1
+q0 -.->|0| q0
+q1 ==>|0| q2
+q1 ==>|1| q0
+q2 ==>|1| q3
+q2 ==>|0| q0
+q3 ==>|1| q4
+q3 ==>|0| q0
+q4 -.->|0,1| q4
+
+classDef start color:red
+classDef ok color:green
 
 #!mermaid
 
 ---
 title: Yud
 ---
+graph LR
+q0((Off)):::start; q1((Off)); q2((Off)); q3((Off)); q4(((On))):::ok;
+
+q0 ==>|1| q1
+q0 -.->|0| q0
+q1 ==>|0| q2
+q1 ==>|1| q0
+q2 ==>|1| q3
+q2 ==>|0| q1
+q3 ==>|1| q4
+q3 ==>|0| q2
+q4 ==>|0,1| q0
+
+classDef start color:red
+classDef ok color:green
