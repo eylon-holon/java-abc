@@ -7,42 +7,95 @@
 ---
 title: Alef
 ---
+graph LR
+qi((qi))
+qt((qt))
+qf(((qf)))
+qi-->|1| qf
+qi-->|0| qt
+qt-->|0,1| qt
+qf-->|0,1| qf
 
 #!mermaid
 
 ---
 title: Bet
 ---
+graph LR
+qi((qi))
+qt((qt))
+qf(((qf)))
+qi-->|1|qf
+qi-->|0|qt
+qf-->|1|qf
+qf-->|0|qi
+qt-->|0|qt
+qt-->|1|qf
 
 #!mermaid
 
 ---
 title: Gimel
 ---
+graph LR
+qi((qi))
+qf(((qf)))
+qi-->|0| qi
+qi-->|1| qf
+qf-->|0,1| qf
 
 #!mermaid
 
 ---
 title: Daled
 ---
+graph LR
+qi((qi))
+qt((qt))
+qm((qm))
+qt2((qt2))
+qf(((qf)))
+qi-->|0| qt
+qt-->|0,1| qt
+qi-->|1| qm
+qm-->|0| qt2
+qt2-->|0,1| qt2
+qm-->|1| qf
+qf-->|0,1| qf
 
 #!mermaid
 
 ---
 title: Hei
 ---
+graph LR
+qi((qi))
+qm((qm))
+qt((qt))
+qf(((qf)))
+qi-->|0| qi
+qi-->|1| qm
+qm-->|1| qf
+qm-->|0| qt
+qf-->|1| qf
+qf-->|0| qt
+qt-->|0| qt
+qt-->|1| qm
 
 #!mermaid
 
 ---
 title: Vav
 ---
-
-#!mermaid
-
----
-title: Zain
----
+graph LR
+qi((qi))
+qm((qm))
+qf(((qf)))
+qi-->|0| qi
+qi-->|1| qm
+qm-->|0| qi
+qm-->|1| qf
+qf-->|0,1| qf
 
 #!mermaid
 
