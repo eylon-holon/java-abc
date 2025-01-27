@@ -7,6 +7,12 @@
 ---
 title: Alef
 ---
+graph LR
+q0 ((q0))
+q1(((q1)))
+q2((q2))
+q0-->|0|q2
+q0-->|1|q1
 
 #!mermaid
 
