@@ -12,15 +12,17 @@ class Queue<T> {
     }
 
     public T head() {
-        if (T isEmpty)
-        head.getValue;
-        return null;
+        return head.getValue();
     }
 
     public void insert(T value) {
+        if(isEmpty())
+        head = new Node<T>(value);
     }
 
+
     public T remove() {
+
         return null;
     }
 }
