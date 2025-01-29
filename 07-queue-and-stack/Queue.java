@@ -5,7 +5,6 @@ class Queue<T> {
     }
 
     public boolean isEmpty() {
-        return false;
     }
 
     public T head() {
