@@ -26,4 +26,10 @@ class Stack {
 
         return value;
     }
+
+    public static Stack fromArray(int[] a) {
+        var stack = new Stack();
+        for (var x: a) stack.push(x);
+        return stack;
+    }
 }
