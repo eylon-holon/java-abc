@@ -2,6 +2,7 @@ class Queue<T> {
     private Node<T> head;
 
     public Queue() {
+        head = this.head;
     }
 
     public boolean isEmpty() {
