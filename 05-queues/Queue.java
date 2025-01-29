@@ -16,12 +16,16 @@ class Queue {
     }
 
     public void insert(int value) {
-        var node = new Node(value, tail);
+        var node = new Node(value);
+
         if (head == null) {
             head = node;
             tail = node;
+            return;
         }
+
         tail.setNext(node);
+        tail = node;
     }
 
     public int remove() {
@@ -35,5 +39,14 @@ class Queue {
         }
 
         return value;
+    }
+
+    public static Queue fromArray(int[] a) {
+        var que = new Queue();
+
+        for (int x: a)
+            que.insert(x);
+
+        return que;
     }
 }
