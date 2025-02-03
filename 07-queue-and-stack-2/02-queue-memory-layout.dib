@@ -5,15 +5,25 @@
 #!mermaid
 
 ---
-title: que[10, 20]
+title: Basic memory layout
 ---
 flowchart LR
 
 subgraph main
+    main.num(num: 123)
+    main.str(str: @String-1)
+    main.str2(str2: @String-1)
     main.que(que: @Queue-1)
     style main fill:#fef5e7
 end
 main.que --> Queue-1
+main.str --> String-1
+main.str2 --> String-1
+
+subgraph String-1
+    ABC('ABC')
+    style String-1 fill:#eafaf1
+end
 
 subgraph Queue-1
     Queue-1.head(head: @Node-1)
@@ -46,14 +56,14 @@ subgraph main
 end
 main.numbers --> IntArray-1
 main.que --> Queue-1
-main ==> contains
+main -.- contains
 
 subgraph contains
     contains.num(num: 222)
     contains.que(que: @Queue-1)
     contains.tmp(tmp: @Queue-2)
     contains.value(value: 222)
-    style contains fill:#e8f8f5
+    style contains fill:#fef5e7
 end
 contains.que --> Queue-1
 contains.tmp --> Queue-2
