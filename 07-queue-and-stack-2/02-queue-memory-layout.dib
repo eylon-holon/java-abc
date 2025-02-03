@@ -41,6 +41,10 @@ subgraph Node-2
     Node-2.next(next: null)
 end
 
+#!markdown
+
+---
+
 #!mermaid
 
 ---
@@ -96,4 +100,19 @@ Node-21.next --> Node-22
 subgraph Node-22
     Node-22.value(value: 222)
     Node-22.next(next: null)
+end
+
+#!markdown
+
+---
+
+#!mermaid
+
+---
+title: "contains(stack: [23, 45, 67], value: 23)"
+---
+flowchart LR
+
+subgraph main
+    style main fill:#fef5e7
 end
