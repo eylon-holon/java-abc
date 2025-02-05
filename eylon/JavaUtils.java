@@ -26,10 +26,9 @@ class JavaUtils {
     
         System.out.print(prompt);
         var answer = scanner.nextLine();
+        System.out.println(answer);
         
-        System.out.println();
         scanner.close();
-    
         return answer;
     }    
 }
