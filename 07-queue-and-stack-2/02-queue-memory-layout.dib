@@ -1,0 +1,118 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!mermaid
+
+---
+title: Basic memory layout
+---
+flowchart LR
+
+subgraph main
+    main.num(num: 123)
+    main.str(str: @String-1)
+    main.str2(str2: @String-1)
+    main.que(que: @Queue-1)
+    style main fill:#fef5e7
+end
+main.que --> Queue-1
+main.str --> String-1
+main.str2 --> String-1
+
+subgraph String-1
+    ABC('ABC')
+    style String-1 fill:#eafaf1
+end
+
+subgraph Queue-1
+    Queue-1.head(head: @Node-1)
+end
+Queue-1.head --> Node-1
+
+subgraph Node-1
+    Node-1.value(value: 10)
+    Node-1.next(next: @Node-2)
+end
+Node-1.next --> Node-2
+
+subgraph Node-2
+    Node-2.value(value: 20)
+    Node-2.next(next: null)
+end
+
+#!markdown
+
+---
+
+#!mermaid
+
+---
+title: "contains(que: [111, 222, 333], value: 222)"
+---
+flowchart LR
+
+subgraph main
+    main.num(num: 222)
+    main.numbers(numbers: @IntArray-1)
+    main.que(que: @Queue-1)
+    style main fill:#fef5e7
+end
+main.numbers --> IntArray-1
+main.que --> Queue-1
+main -.- contains
+
+subgraph contains
+    contains.num(num: 222)
+    contains.que(que: @Queue-1)
+    contains.tmp(tmp: @Queue-2)
+    contains.value(value: 222)
+    style contains fill:#fef5e7
+end
+contains.que --> Queue-1
+contains.tmp --> Queue-2
+
+subgraph IntArray-1
+    111; 222; 333
+end
+
+subgraph Queue-1
+    Queue-1.head(head: @Node-11)
+end
+Queue-1.head --> Node-11
+
+subgraph Node-11
+    Node-11.value(value: 333)
+    Node-11.next(next: null)
+end
+
+subgraph Queue-2
+    Queue-2.head(head: @Node-21)
+end
+Queue-2.head --> Node-21
+
+subgraph Node-21
+    Node-21.value(value: 111)
+    Node-21.next(next: @Node-22)
+end
+Node-21.next --> Node-22
+
+subgraph Node-22
+    Node-22.value(value: 222)
+    Node-22.next(next: null)
+end
+
+#!markdown
+
+---
+
+#!mermaid
+
+---
+title: "contains(stack: [23, 45, 67], value: 23)"
+---
+flowchart LR
+
+subgraph main
+    style main fill:#fef5e7
+end
