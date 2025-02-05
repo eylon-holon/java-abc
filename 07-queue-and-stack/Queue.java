@@ -5,6 +5,7 @@ class Queue<T> {
     }
 
     public boolean isEmpty() {
+        
         return false;
     }
 
@@ -16,6 +17,9 @@ class Queue<T> {
     }
 
     public T remove() {
+        if (!q.isEmpty()){
+           return true;
+        }
         return null;
     }
 }
