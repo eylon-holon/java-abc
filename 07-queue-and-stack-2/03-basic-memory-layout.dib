@@ -1,0 +1,103 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!markdown
+
+Q-01
+
+#!mermaid
+
+---
+title: Basic values and references
+---
+flowchart LR
+
+subgraph main
+    main.num(num: 123)
+    main.d(d: 12.3)
+    main.b(b: true)
+    main.str(str: @String-1)
+    main.nums(nums: @IntArray-1)
+    main.a(a: @A-1)
+    style main fill:#fef5e7
+end
+main.str --> String-1
+main.nums --> IntArray-1
+main.a --> A-1
+
+subgraph String-1
+    ABC('ABC')
+    style String-1 fill:#eafaf1
+end
+
+subgraph IntArray-1
+    1; 2; 3
+end
+
+subgraph A-1
+    A-1.count(count: 321)
+end
+
+#!markdown
+
+Q-02
+
+#!mermaid
+
+---
+title: "Q-02: main"
+---
+flowchart LR
+
+subgraph main
+    main.str(name: ???)
+    main.age(age: 27)
+    main.person(person: @Person-1)
+    style main fill:#fef5e7
+end
+
+subgraph Person-1
+    Person-1.age(age: 27)
+    Person-1.name(name: ???)
+end
+
+#!mermaid
+
+---
+title: "Q-02: printPerson"
+---
+flowchart LR
+
+subgraph main
+    main.str(name: ???)
+    main.age(age: 27)
+    main.person(person: @Person-1)
+    style main fill:#fef5e7
+end
+
+subgraph Person-1
+    Person-1.age(age: 27)
+    Person-1.name(name: ???)
+end
+
+subgraph printPerson
+    printPerson.age(age: ???)
+    printPerson.name(name: ???)
+    style printPerson fill:#fef5e7
+end
+
+#!markdown
+
+Q-03
+
+#!mermaid
+
+---
+title: "Q-03: main"
+---
+flowchart LR
+
+subgraph main
+    style main fill:#fef5e7
+end
