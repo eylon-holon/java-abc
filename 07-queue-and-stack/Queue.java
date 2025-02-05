@@ -5,17 +5,21 @@ class Queue<T> {
     }
 
     public boolean isEmpty() {
-        return false;
+        if (head == null)
+            return true;
+        else
+            return false;
     }
 
     public T head() {
-        return null;
+        return head.getValue();
     }
 
     public void insert(T value) {
     }
 
     public T remove() {
-        return null;
+        head = head.getNext();
+        return head.getValue();
     }
 }
