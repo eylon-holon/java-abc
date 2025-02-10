@@ -18,6 +18,7 @@ class Queue<T> {
     }
 
     public void insert(T value) {
+        Node 
         
     }
 
