@@ -78,7 +78,7 @@ title: "Q-02: printPerson"
 flowchart LR
 
 subgraph main
-    main.str(name: ???)
+    main.str(name: @String-1)
     main.age(age: 27)
     main.person(person: @Person-1)
     style main fill:#fef5e7
@@ -86,14 +86,22 @@ end
 
 subgraph Person-1
     Person-1.age(age: 27)
-    Person-1.name(name: ???)
+    Person-1.name(name: @String-1)
 end
 
 subgraph printPerson
-    printPerson.age(age: ???)
-    printPerson.name(name: ???)
+    printPerson.p(p:@Person-1)
     style printPerson fill:#fef5e7
 end
+
+subgraph String-1
+    String-1.name(Tamar)
+end
+
+main.person --> Person-1
+Person-1.name --> String-1
+printPerson.p --> Person-1
+main.str --> String-1
 
 #!markdown
 
@@ -107,5 +115,11 @@ title: "Q-03: main"
 flowchart LR
 
 subgraph main
+    Person-1.age(age: 27)
+    Person-1.name(name: @String-1)
     style main fill:#fef5e7
+end
+
+subgraph String-1
+    String-1.name(???)
 end
