@@ -211,12 +211,15 @@ class FSM {
             "FSM['%s', %d, %d, %d]", _name, _def.states.length, _def.alefBet.length, _def.rules.length))
             .append("\n");
 
+        var states = new String[_def.states.length];
+        for (int i = 0; i < _def.states.length; i++) {
+            var st = _def.states[i];
+            states[i] = String.format("%s(%d)", st.name, st.id); 
+        }
+
         sb
             .append("  states:  [")
-            .append(String.join(", ", Arrays
-                .stream(_def.states)
-                .map(st -> String.format("%s(%d)", st.name, st.id))
-                .toList()))
+            .append(String.join(", ", states))
             .append("]\n");
 
         sb
