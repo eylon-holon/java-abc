@@ -1,0 +1,357 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!mermaid
+
+---
+title: Q-01
+---
+flowchart LR
+
+subgraph main
+    main.name(name: @String-1)
+    main.grade(grade: 89)
+    main.stu(stu: @Student-1)
+    style main fill:#fef5e7
+end
+main.name --> String-1
+main.stu --> Student-1
+
+subgraph String-1
+    value('Dani')
+    style String-1 fill:#eafaf1
+end
+
+subgraph Student-1
+    Student-1.name(name: @String-1)
+    Student-1.grade(grade: 89)
+end
+Student-1.name --> String-1
+
+#!mermaid
+
+---
+title: Q-02
+---
+flowchart LR
+
+subgraph main
+    main.stu(stu: @Student-1)
+    style main fill:#fef5e7
+end
+main.stu --> Student-1
+
+subgraph String-1
+    value('Dani')
+    style String-1 fill:#eafaf1
+end
+
+subgraph Student-1
+    Student-1.name(name: @String-1)
+    Student-1.grade(grade: 89)
+end
+Student-1.name --> String-1
+
+#!mermaid
+
+---
+title: Q-03
+---
+flowchart LR
+
+subgraph main
+    main.n1(n1: @Node-1)
+    main.n2(n2: @Node-2)
+    style main fill:#fef5e7
+end
+main.n1 --> Node-1
+main.n2 --> Node-2
+
+subgraph Node-1
+    Node-1.value(value: 1)
+    Node-1.next(next: @Node-2)
+end
+Node-1.next --> Node-2
+
+subgraph Node-2
+    Node-2.value(value: 2)
+    Node-2.next(next: null)
+end
+
+#!mermaid
+
+---
+title: Q-04
+---
+flowchart LR
+
+subgraph main
+    main.list(list: @Node-1)
+    style main fill:#fef5e7
+end
+main.list --> Node-1
+
+subgraph Node-1
+    Node-1.value(value: 1)
+    Node-1.next(next: @Node-2)
+end
+Node-1.next --> Node-2
+
+subgraph Node-2
+    Node-2.value(value: 2)
+    Node-2.next(next: null)
+end
+
+#!mermaid
+
+---
+title: Q-05
+---
+flowchart LR
+
+subgraph main
+    main.numbers(numbers: @IntArray-1)
+    main.que(que: @Queue-1)
+    style main fill:#fef5e7
+end
+main.que ---> Queue-1
+main.numbers --> IntArray-1
+
+subgraph IntArray-1
+    1; 2
+end
+
+subgraph Queue-1
+    Queue-1.head(head: @Node-1)
+end
+Queue-1.head --> Node-1
+
+subgraph Node-1
+    Node-1.value(value: 1)
+    Node-1.next(next: @Node-2)
+end
+Node-1.next --> Node-2
+
+subgraph Node-2
+    Node-2.value(value: 2)
+    Node-2.next(next: null)
+end
+
+#!mermaid
+
+---
+title: Q-06
+---
+flowchart LR
+
+subgraph main
+    main.que(que: @Queue-1)
+    style main fill:#fef5e7
+end
+main.que --> Queue-1
+
+subgraph Queue-1
+    Queue-1.head(head: @Node-1)
+end
+Queue-1.head --> Node-1
+
+subgraph Node-1
+    Node-1.value(value: 1)
+    Node-1.next(next: @Node-2)
+end
+Node-1.next --> Node-2
+
+subgraph Node-2
+    Node-2.value(value: 2)
+    Node-2.next(next: null)
+end
+
+#!mermaid
+
+---
+title: Q-07
+---
+flowchart LR
+
+subgraph main
+    main.n1(n1: @Node-1)
+    main.n2(n2: @Node-2)
+    main.nodes(nodes: @NodeArray-1)
+    style main fill:#fef5e7
+end
+main.n1 --> Node-1
+main.n2 --> Node-2
+main.nodes --> NodeArray-1
+
+subgraph Node-1
+    Node-1.value(value: 1)
+    Node-1.next(next: null)
+end
+
+subgraph Node-2
+    Node-2.value(value: 2)
+    Node-2.next(next: null)
+end
+
+subgraph NodeArray-1
+    NodeArray-1.0(@Node-1)
+    NodeArray-1.1(@Node-2)
+end
+NodeArray-1.0 --> Node-1
+NodeArray-1.1 --> Node-2
+
+#!mermaid
+
+---
+title: Q-08
+---
+flowchart LR
+
+subgraph main
+    main.nodes(nodes: @NodeArray-1)
+    style main fill:#fef5e7
+end
+main.nodes --> NodeArray-1
+
+subgraph Node-1
+    Node-1.value(value: 1)
+    Node-1.next(next: null)
+end
+
+subgraph Node-2
+    Node-2.value(value: 2)
+    Node-2.next(next: null)
+end
+
+subgraph NodeArray-1
+    NodeArray-1.0(@Node-1)
+    NodeArray-1.1(@Node-2)
+end
+NodeArray-1.0 --> Node-1
+NodeArray-1.1 --> Node-2
+
+#!mermaid
+
+---
+title: Q-09
+---
+flowchart LR
+
+subgraph main
+    main.n1(n1: @Node-1)
+    main.n2(n2: @Node-2)
+    main.nodes(nodes: @NodeArray-1)
+    style main fill:#fef5e7
+end
+main.n1 ---> Node-1
+main.n2 ---> Node-2
+main.nodes --> NodeArray-1
+
+subgraph Node-1
+    Node-1.value(value: 1)
+    Node-1.next(next: @Node-2)
+end
+Node-1.next --> Node-2
+
+subgraph Node-2
+    Node-2.value(value: 2)
+    Node-2.next(next: @Node-1)
+end
+Node-2.next --> Node-1
+
+subgraph NodeArray-1
+    NodeArray-1.0(@Node-1)
+    NodeArray-1.1(@Node-1)
+    NodeArray-1.2(@Node-1)
+end
+NodeArray-1.0 --> Node-1
+NodeArray-1.1 --> Node-1
+NodeArray-1.2 --> Node-1
+
+#!mermaid
+
+---
+title: Q-10
+---
+flowchart LR
+
+subgraph main
+    main.students(students: @StudentArray-1)
+    style main fill:#fef5e7
+end
+main.students --> StudentArray-1
+
+subgraph StudentArray-1
+    StudentArray-1.0(0: @Student-1)
+    StudentArray-1.1(1: @Student-2)
+    StudentArray-1.2(2: @Student-3)
+end
+StudentArray-1.0 --> Student-1
+StudentArray-1.1 --> Student-2
+StudentArray-1.2 --> Student-3
+
+subgraph String-1
+    String-1.value('Avi')
+    style String-1 fill:#eafaf1
+end
+
+subgraph String-2
+    String-2.value('Beni')
+    style String-2 fill:#eafaf1
+end
+
+subgraph Student-1
+    Student-1.name(name: @String-1)
+    Student-1.grade(grade: 89)
+end
+Student-1.name --> String-1
+
+subgraph Student-2
+    Student-2.name(name: @String-2)
+    Student-2.grade(grade: 91)
+end
+Student-2.name --> String-2
+
+subgraph Student-3
+    Student-3.name(name: @String-1)
+    Student-3.grade(grade: 93)
+end
+Student-3.name --> String-1
+
+#!mermaid
+
+---
+title: Q-11
+---
+flowchart LR
+
+subgraph main
+    main.stu1(stu1: @Student-1)
+    main.stu2(stu2: @Student-2)
+    style main fill:#fef5e7
+end
+main.stu1 --> Student-1
+main.stu2 --> Student-2
+
+subgraph String-1
+    String-1.value('Avi')
+    style String-1 fill:#eafaf1
+end
+
+subgraph String-2
+    String-2.value('Avi')
+    style String-2 fill:#eafaf1
+end
+
+subgraph Student-1
+    Student-1.name(name: @String-1)
+    Student-1.grade(grade: 89)
+end
+Student-1.name --> String-1
+
+subgraph Student-2
+    Student-2.name(name: @String-2)
+    Student-2.grade(grade: 91)
+end
+Student-2.name --> String-2
