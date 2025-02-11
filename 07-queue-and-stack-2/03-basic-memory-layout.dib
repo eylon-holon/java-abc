@@ -51,16 +51,24 @@ title: "Q-02: main"
 flowchart LR
 
 subgraph main
-    main.str(name: ???)
+    main.str(name: @String-1)
     main.age(age: 27)
     main.person(person: @Person-1)
     style main fill:#fef5e7
 end
 
+main.person --> Person-1
 subgraph Person-1
     Person-1.age(age: 27)
-    Person-1.name(name: ???)
+    Person-1.name(name: @String-1)
+   
 end
+Person-1.name --> String-1
+main.str --> String-1
+subgraph String-1
+    String-1.name(name: 'ziv')
+    style String-1 fill:#eafaf1
+ end
 
 #!mermaid
 
@@ -76,16 +84,24 @@ subgraph main
     style main fill:#fef5e7
 end
 
+main.person --> Person-1
 subgraph Person-1
     Person-1.age(age: 27)
     Person-1.name(name: ???)
 end
 
+printperson --> Person-1
 subgraph printPerson
-    printPerson.age(age: ???)
-    printPerson.name(name: ???)
+     printperson(printperson: @Person-1)
     style printPerson fill:#fef5e7
 end
+
+Person-1.name --> String-1
+main.str --> String-1
+subgraph String-1
+    String-1.name(name: 'ziv')
+    style String-1 fill:#eafaf1
+ end
 
 #!markdown
 
@@ -99,5 +115,18 @@ title: "Q-03: main"
 flowchart LR
 
 subgraph main
+    main.person(person: @Person-1)
     style main fill:#fef5e7
+end
+
+main.person --> Person-1
+subgraph Person-1
+    Person-1.age(age: 'ziv')
+    Person-1.name(name: @String-1)
+end
+
+Person-1.name --> String-1
+subgraph String-1
+    String-1.name(name: 'ziv')
+    style String-1 fill:#eafaf1
 end
