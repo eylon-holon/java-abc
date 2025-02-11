@@ -57,9 +57,18 @@ subgraph main
     style main fill:#fef5e7
 end
 
+main.str-->Person-1
+main.person-->String-1
+Person-1-->String-1;
+
 subgraph Person-1
-    Person-1.age(age: 27)
-    Person-1.name(name: ???)
+Person-1.str(???)
+Person.age(27)
+style main fill:#fef5e7
+end
+
+subgraph String-1
+String-1.person(@Person-1)
 end
 
 #!mermaid
@@ -75,15 +84,19 @@ subgraph main
     main.person(person: @Person-1)
     style main fill:#fef5e7
 end
-
-subgraph Person-1
-    Person-1.age(age: 27)
-    Person-1.name(name: ???)
+main.age--> Age-1
+main.str--> Name-1
+subgraph Age-1
+   Age-1.age(27)
+   end
+   subgraph Name-1
+   Name-1.str(???)
 end
 
 subgraph printPerson
-    printPerson.age(age: ???)
-    printPerson.name(name: ???)
+   Age-1.age(age: 27)--> printPerson.age(age: ???)
+
+   Name-1.str(name: ???)--> printPerson.name(name: ???)
     style printPerson fill:#fef5e7
 end
 
@@ -99,5 +112,7 @@ title: "Q-03: main"
 flowchart LR
 
 subgraph main
+main.str(name:???)
+main.age(age:27)
     style main fill:#fef5e7
 end
