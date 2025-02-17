@@ -1,0 +1,17 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!mermaid
+
+---
+title: intro
+nondetermenistic: true
+---
+graph LR
+
+q0((q0))
+q1(((q1)))
+
+q0 -->|0,1| q0
+q0 -->|1| q1

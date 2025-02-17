@@ -81,6 +81,10 @@ class FSM {
 
             for (var ch: rule.chars) {
                 var at = _ch2at[ch];
+
+                if (_fsm[from][at] != -1)
+                    print("ERROR: state '%s' is not determenistic (transition: '%s'); \nPlease specify 'nondetermenistic' flag if it's the intention", rule.from.name, ch);
+                
                 _fsm[from][at] = to;
 
                 if (traceInit)

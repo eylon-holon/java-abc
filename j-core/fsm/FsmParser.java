@@ -31,6 +31,10 @@ class FsmParser {
         return ln.replaceAll("\\s","");
     }
 
+    private boolean itsAComment(String ln) {
+        return ln.startsWith("%%");
+    }
+
     private boolean itsAStateLine(String ln) {
         ln = removeSpaces(ln);
         return
@@ -186,6 +190,9 @@ class FsmParser {
 
     public FsmParser(String[] graph, boolean log) {
         for (var ln: graph) {
+            if (itsAComment(ln))
+                continue;
+            else
             if (itsAStateLine(ln))
                 parseStates(ln, log);
             else
