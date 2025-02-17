@@ -1,5 +1,5 @@
 class FsmFromMermaid2 {
-    public static FSM parse(String graphName, String filePath, boolean... logFlags) {
+    public static IFSM parse(String graphName, String filePath, boolean... logFlags) {
         var log = logFlags.length > 0 && logFlags[0];
 
         var graph = MermaidFile2.loadGraph(graphName, filePath, log);
@@ -11,7 +11,9 @@ class FsmFromMermaid2 {
             parser.getRules()
         );
 
-        return new FSM(graphName, def, log);
+        return graph.nondetermenistic() ?
+            new NondetermenisticFsm(graphName, def, log) : 
+            new DetermenisticFsm(graphName, def, log);
     }    
 }
 
