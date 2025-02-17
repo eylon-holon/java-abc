@@ -3,7 +3,6 @@ import java.util.*;
 class DetermenisticFsm extends FSM {
     private final String _name;
     private final Def _def;
-    private final int[] _ch2at;
     private final int[][] _fsm;
 
     private final boolean _hasNoStates;
@@ -20,17 +19,22 @@ class DetermenisticFsm extends FSM {
         return letter.charAt(0);        
     }
 
+    private static int getAt(String[] alefBet, char ch) {
+        for (int i = 0; i < alefBet.length; i++) {
+            if (ch == alefBet[i].charAt(0))
+                return i;
+        }
+        return -1;
+    }
+
     public DetermenisticFsm(String name, Def def, boolean traceInit) {
         _name = name;
         _def = def;
 
         // initalize alef-bet
 
-        _ch2at = new int[Character.MAX_VALUE];
-
         for (int at = 0; at < def.alefBet.length; at++) {
             var ch = letter2ch(def.alefBet[at]);
-            _ch2at[ch] = at;
 
             if (traceInit)
                 print("ch2at['%s'] = %d  ==>  ch2at[%d] = %d", ch, at, (int) ch, at);
@@ -50,7 +54,9 @@ class DetermenisticFsm extends FSM {
 
             for (var letter: transition.rules) {
                 var ch = letter2ch(letter);
-                var at = _ch2at[ch];
+
+                var at = getAt(def.alefBet, ch);
+                assert at != -1;
 
                 if (_fsm[from][at] != -1)
                     print("ERROR: state '%s' is not determenistic (transition: '%s'); \nPlease specify 'nondetermenistic' flag if it's the intention", transition.from.name, ch);
@@ -93,24 +99,17 @@ class DetermenisticFsm extends FSM {
         print("  '%s': %s --> %s", _def.alefBet[at], from.name, to.name);
     }
 
-    private int getAt(char ch) {
-        var chars = _def.alefBet;
-        for (int i = 0; i < chars.length; i++) {
-            if (ch == chars[i].charAt(0))
-                return i;
-        }
-        return -1;
-    }
-
     private int next(char ch, boolean trace) {
         var from = _def.states[current];
         assert from != null;
 
-        var at = getAt(ch);
+        var at = getAt(_def.alefBet, ch);
+
         if (at == -1)
             return error(from, String.format("Undefined transition '%s'", ch));
 
         var next = _fsm[current][at];
+
         if (next == -1)
             return error(from, String.format("No transition for '%s' is defined", ch));
 
@@ -129,6 +128,10 @@ class DetermenisticFsm extends FSM {
 
     public String[] getNotCompletedStates() {
         return _notCompletedStates;
+    }
+
+    public boolean determenistic() {
+        return true;
     }
 
     public boolean accept(String word, boolean trace) {

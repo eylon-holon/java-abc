@@ -1,6 +1,7 @@
 interface IFSM {
     boolean isComplete();
     String[] getNotCompletedStates();
+    boolean determenistic();
     boolean accept(String word, boolean trace);
     boolean accept(String word);
     boolean[] accept(String... many);

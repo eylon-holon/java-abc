@@ -19,7 +19,21 @@ q0 -->|1| q1
 #!mermaid
 
 ---
-title: intro
+title: intro-2
+nondetermenistic: 1
+---
+graph LR
+
+q0((q0))
+q1(((q1)))
+
+q0 -->|0| q0
+q0 -->|1| q1
+
+#!mermaid
+
+---
+title: With-Stack
 nondetermenistic: true
 with-stack: ┴
 ---
