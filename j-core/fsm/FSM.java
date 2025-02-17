@@ -24,9 +24,9 @@ abstract class FSM implements IFSM {
     public static class Rule {
         public State from;
         public State to;
-        public char[] chars;
+        public String[] chars;
 
-        public Rule(State from, State to, char[] chars) {
+        public Rule(State from, State to, String[] chars) {
             this.from = from;
             this.to = to;
             this.chars = chars;
@@ -35,11 +35,11 @@ abstract class FSM implements IFSM {
 
     public static class Def {
         public State[] states;
-        public char[] alefBet;
+        public String[] alefBet;
         public Rule[] rules;
         public boolean nondetermenistic;
 
-        public Def(State[] states, char[] alefBet, Rule[] rules) {
+        public Def(State[] states, String[] alefBet, Rule[] rules) {
             this.states = states;
             this.alefBet = alefBet;
             this.rules = rules;
@@ -47,11 +47,11 @@ abstract class FSM implements IFSM {
         }
     }
 
-    protected void print(String fmt, Object... args) {
+    protected static void print(String fmt, Object... args) {
         System.out.println(String.format(fmt, args));
     }
 
-    protected int error(State in, String errMsg) {
+    protected static int error(State in, String errMsg) {
         print("ERROR in %s: %s", in.name, errMsg);
         return -1;
     }

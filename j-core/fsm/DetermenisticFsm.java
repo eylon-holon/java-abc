@@ -11,6 +11,15 @@ class DetermenisticFsm extends FSM {
 
     private int current;
 
+    private static char letter2ch(String letter) {
+        if (letter.length() != 1) {
+            print("ERROR: Determenistic FSM supports only single letter transitions: '%s'", letter);
+            return 0;
+        }
+
+        return letter.charAt(0);        
+    }
+
     public DetermenisticFsm(String name, Def def, boolean traceInit) {
         _name = name;
         _def = def;
@@ -20,7 +29,7 @@ class DetermenisticFsm extends FSM {
         _ch2at = new int[Character.MAX_VALUE];
 
         for (int at = 0; at < def.alefBet.length; at++) {
-            var ch = def.alefBet[at];
+            var ch = letter2ch(def.alefBet[at]);
             _ch2at[ch] = at;
 
             if (traceInit)
@@ -39,7 +48,8 @@ class DetermenisticFsm extends FSM {
             int from = rule.from.id;
             int to = rule.to.id;
 
-            for (var ch: rule.chars) {
+            for (var letter: rule.chars) {
+                var ch = letter2ch(letter);
                 var at = _ch2at[ch];
 
                 if (_fsm[from][at] != -1)
@@ -86,7 +96,7 @@ class DetermenisticFsm extends FSM {
     private int getAt(char ch) {
         var chars = _def.alefBet;
         for (int i = 0; i < chars.length; i++) {
-            if (ch == chars[i])
+            if (ch == chars[i].charAt(0))
                 return i;
         }
         return -1;

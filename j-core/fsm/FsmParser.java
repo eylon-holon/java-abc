@@ -3,16 +3,16 @@ import java.util.regex.Pattern;
 
 class FsmParser {
     private List<FSM.State> states = new ArrayList<>();
-    private Set<Character> alefBet = new HashSet<>();
+    private Set<String> alefBet = new HashSet<>();
     private List<FSM.Rule> rules = new ArrayList<>();
 
     public FSM.State[] getStates() {
         return states.toArray(FSM.State[]::new);
     }
 
-    public char[] getAlefBet() {
+    public String[] getAlefBet() {
         var count = alefBet.size();
-        var chars = new char[count];
+        var chars = new String[count];
         var i = 0;
         for (var ch: alefBet)
             chars[i++] = ch;
@@ -149,22 +149,17 @@ class FsmParser {
         return state;
     }
 
-    private char[] parseTransitions(String ln) {
+    private String[] parseTransitions(String ln) {
         var split = ln.split(Pattern.quote("|"));
         var letters = split[1].split(",");
 
-        var chars = new char[letters.length];
+        var chars = new String[letters.length];
 
         for (int i = 0; i < letters.length; i++) {
             var letter = letters[i];
 
-            if (letter.length() > 1)
-                print("WARN: '%s' has a letter '%s' which is not a single character", ln, letter);
-
-            var ch = letter.charAt(0);
-
-            chars[i] = ch;
-            alefBet.add(ch);
+            chars[i] = letter;
+            alefBet.add(letter);
         }
 
         return chars;
