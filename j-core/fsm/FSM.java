@@ -22,12 +22,12 @@ abstract class FSM implements IFSM {
     public static class Transition {
         public State from;
         public State to;
-        public String[] chars;
+        public String[] rules;
 
-        public Transition(State from, State to, String[] chars) {
+        public Transition(State from, State to, String[] rules) {
             this.from = from;
             this.to = to;
-            this.chars = chars;
+            this.rules = rules;
         }
     }
 

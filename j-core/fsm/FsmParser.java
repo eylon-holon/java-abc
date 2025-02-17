@@ -12,11 +12,11 @@ class FsmParser {
 
     public String[] getAlefBet() {
         var count = alefBet.size();
-        var chars = new String[count];
+        var letters = new String[count];
         var i = 0;
-        for (var ch: alefBet)
-            chars[i++] = ch;
-        return chars;
+        for (var letter: alefBet)
+            letters[i++] = letter;
+        return letters;
     }
 
     public FSM.Transition[] getTransitions() {
@@ -149,20 +149,23 @@ class FsmParser {
         return state;
     }
 
-    private String[] parseTransitions(String ln) {
+    private String[] parseRules(String ln) {
         var split = ln.split(Pattern.quote("|"));
         var letters = split[1].split(",");
 
-        var chars = new String[letters.length];
+        var rules = new String[letters.length];
 
         for (int i = 0; i < letters.length; i++) {
             var letter = letters[i];
 
-            chars[i] = letter;
+            if (letter.length() > 1)
+                print("ERROR: currently only single letters are supported in alef-bet (%s)", ln);
+
+            rules[i] = letter;
             alefBet.add(letter);
         }
 
-        return chars;
+        return rules;
     }
 
     private void parseTransition(String ln, boolean log) {
@@ -170,15 +173,15 @@ class FsmParser {
 
         var froms = parseFromStates(ln);
         var to = parseToState(ln);
-        var chars = parseTransitions(ln);
+        var rules = parseRules(ln);
 
         if (froms.length == 0 || to == null)
             return;
 
         for (var from: froms) {
-            if (log) print("transition: %s -> %s %s", from.name, to.name, Arrays.toString(chars));
+            if (log) print("transition: %s -> %s %s", from.name, to.name, Arrays.toString(rules));
         
-            var transition = new FSM.Transition(from, to, chars);
+            var transition = new FSM.Transition(from, to, rules);
             transitions.add(transition);
         }
     }

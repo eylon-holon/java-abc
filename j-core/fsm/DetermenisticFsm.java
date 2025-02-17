@@ -13,7 +13,7 @@ class DetermenisticFsm extends FSM {
 
     private static char letter2ch(String letter) {
         if (letter.length() != 1) {
-            print("ERROR: Determenistic FSM supports only single letter transitions: '%s'", letter);
+            print("ERROR: Determenistic FSM supports only single letter rules: '%s'", letter);
             return 0;
         }
 
@@ -48,7 +48,7 @@ class DetermenisticFsm extends FSM {
             int from = transition.from.id;
             int to = transition.to.id;
 
-            for (var letter: transition.chars) {
+            for (var letter: transition.rules) {
                 var ch = letter2ch(letter);
                 var at = _ch2at[ch];
 
@@ -185,7 +185,7 @@ class DetermenisticFsm extends FSM {
         sb.append("  transitions:  [\n");
         for (var transition: _def.transitions) {
             sb.append(String.format("    %s -%s-> %s\n",
-                transition.from.name, Arrays.toString(transition.chars), transition.to.name));
+                transition.from.name, Arrays.toString(transition.rules), transition.to.name));
         }
         sb.append("  ]\n");
 
