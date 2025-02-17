@@ -44,21 +44,21 @@ class DetermenisticFsm extends FSM {
             Arrays.fill(ln, -1);
         }
 
-        for (var rule: def.rules) {
-            int from = rule.from.id;
-            int to = rule.to.id;
+        for (var transition: def.transitions) {
+            int from = transition.from.id;
+            int to = transition.to.id;
 
-            for (var letter: rule.chars) {
+            for (var letter: transition.chars) {
                 var ch = letter2ch(letter);
                 var at = _ch2at[ch];
 
                 if (_fsm[from][at] != -1)
-                    print("ERROR: state '%s' is not determenistic (transition: '%s'); \nPlease specify 'nondetermenistic' flag if it's the intention", rule.from.name, ch);
+                    print("ERROR: state '%s' is not determenistic (transition: '%s'); \nPlease specify 'nondetermenistic' flag if it's the intention", transition.from.name, ch);
                 
                 _fsm[from][at] = to;
 
                 if (traceInit)
-                    print("fsm[%s]['%s'] = %s  ==>  fsm[%d][%d] = %d", rule.from.name, ch, rule.to.name, from, at, to);
+                    print("fsm[%s]['%s'] = %s  ==>  fsm[%d][%d] = %d", transition.from.name, ch, transition.to.name, from, at, to);
             }
         }
 
@@ -163,7 +163,7 @@ class DetermenisticFsm extends FSM {
 
         sb
             .append(String.format(
-            "FSM['%s', %d, %d, %d]", _name, _def.states.length, _def.alefBet.length, _def.rules.length))
+            "FSM['%s', %d, %d, %d]", _name, _def.states.length, _def.alefBet.length, _def.transitions.length))
             .append("\n");
 
         var states = new String[_def.states.length];
@@ -182,10 +182,10 @@ class DetermenisticFsm extends FSM {
             .append(Arrays.toString(_def.alefBet))
             .append("\n");
 
-        sb.append("  rules:  [\n");
-        for (var rule: _def.rules) {
+        sb.append("  transitions:  [\n");
+        for (var transition: _def.transitions) {
             sb.append(String.format("    %s -%s-> %s\n",
-                rule.from.name, Arrays.toString(rule.chars), rule.to.name));
+                transition.from.name, Arrays.toString(transition.chars), transition.to.name));
         }
         sb.append("  ]\n");
 

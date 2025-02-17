@@ -1,5 +1,3 @@
-import java.util.*;
-
 interface IFSM {
     boolean isComplete();
     String[] getNotCompletedStates();
@@ -21,12 +19,12 @@ abstract class FSM implements IFSM {
         }
     }
 
-    public static class Rule {
+    public static class Transition {
         public State from;
         public State to;
         public String[] chars;
 
-        public Rule(State from, State to, String[] chars) {
+        public Transition(State from, State to, String[] chars) {
             this.from = from;
             this.to = to;
             this.chars = chars;
@@ -36,13 +34,13 @@ abstract class FSM implements IFSM {
     public static class Def {
         public State[] states;
         public String[] alefBet;
-        public Rule[] rules;
+        public Transition[] transitions;
         public boolean nondetermenistic;
 
-        public Def(State[] states, String[] alefBet, Rule[] rules) {
+        public Def(State[] states, String[] alefBet, Transition[] transitions) {
             this.states = states;
             this.alefBet = alefBet;
-            this.rules = rules;
+            this.transitions = transitions;
             this.nondetermenistic = false;
         }
     }

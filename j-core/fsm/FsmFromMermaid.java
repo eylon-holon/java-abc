@@ -4,14 +4,14 @@ class FsmFromMermaid {
         var q1 = new FSM.State(1, "q1", false);
         var q2 = new FSM.State(2, "q2", true);
 
-        var r0 = new FSM.Rule(q0, q1, new String[] {"0", "1"});
-        var r1 = new FSM.Rule(q1, q0, new String[] {"0"});
-        var r2 = new FSM.Rule(q1, q2, new String[] {"1"});
+        var r0 = new FSM.Transition(q0, q1, new String[] {"0", "1"});
+        var r1 = new FSM.Transition(q1, q0, new String[] {"0"});
+        var r2 = new FSM.Transition(q1, q2, new String[] {"1"});
 
         var def = new FSM.Def(
             new FSM.State[] {q0, q1, q2},
             new String[] {"0", "1"},
-            new FSM.Rule[] {r0, r1, r2}
+            new FSM.Transition[] {r0, r1, r2}
         );
 
         var fsm = new DetermenisticFsm("101", def, false);
@@ -28,7 +28,7 @@ class FsmFromMermaid {
         var def = new FSM.Def(
             parser.getStates(),
             parser.getAlefBet(),
-            parser.getRules()
+            parser.getTransitions()
         );
 
         return new DetermenisticFsm(graphName, def, log);
