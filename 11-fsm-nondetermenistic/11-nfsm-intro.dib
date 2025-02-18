@@ -56,3 +56,24 @@ q3 -->|"b S| pop S"| q5
 q3 -->|"b A| pop A"| q4
 q4 -->|"b A| nop
         b S| nop  "| q2
+
+#!mermaid
+
+---
+title: q-01
+nondetermenistic: false
+---
+
+#!mermaid
+
+---
+title: q-02
+nondetermenistic: true
+---
+
+#!mermaid
+
+---
+title: q-03
+nondetermenistic: true
+---
