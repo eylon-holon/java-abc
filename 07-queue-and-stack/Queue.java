@@ -12,6 +12,7 @@ class Queue<T> {
     }
 
     public T head() {
+        
         return head.getValue();
     }
 
