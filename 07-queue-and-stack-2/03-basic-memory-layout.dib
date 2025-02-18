@@ -110,11 +110,20 @@ title: "Q-03: main"
 flowchart LR
 
 subgraph main
-    main.person(person: @createPerson)
-    style main fill:#fef5e7
+    main.person(person: @Person)
 end
-main.person --> createPerson
 subgraph createPerson
-    createPerson.name(name: @name)
-    createPerson.age(age: [input])
+createPerson.name(name: @Name)
+createPerson.age(age: input)
+end
+main.person --> Person
+subgraph Person
+Person.name(name: @createPerson)
+Person.age(age: @createPerson)
+end
+Person.name --> createPerson.name
+Person.age --> createPerson.age
+createPerson.name --> Name
+subgraph Name
+Name.name(input)
 end
