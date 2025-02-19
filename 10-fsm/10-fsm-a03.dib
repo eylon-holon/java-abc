@@ -7,12 +7,21 @@
 ---
 title: q-01
 ---
+graph LR
+q0((q0))
+q1(((q1)))
+q0-->|0,1| q0
+q0-->|c| q1
+q1-->|0,1| q1
 
 #!mermaid
 
 ---
 title: q-02
 ---
+graph LR
+q0((q0))
+q1(((q1)))
 
 #!mermaid
 
