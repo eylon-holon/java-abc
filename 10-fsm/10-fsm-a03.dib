@@ -117,3 +117,17 @@ q4 --> |a| q1
 q4 --> |b| q2
 q5 -.-> |a| q3
 q5 --> |b| q2
+
+#!mermaid
+
+---
+title: q-07
+---
+graph LR
+
+#!mermaid
+
+---
+title: q-08
+---
+graph LR
