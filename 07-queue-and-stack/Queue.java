@@ -13,14 +13,21 @@ class Queue<T> {
     public T head() {
         if(isEmpty())
             return false;
-        return head.getvalue;
+        return head.getvalue();
     }
 
     public void insert(T value) {
-        Node node 
+        if(isEmpty())
+            head = new Node <T>{value};
+        private Node<T> node = head;
+        while(node.getNext() != null)
+            node = node.getNext();
+        node.getNext() = new Node <T>{value};
     }
 
     public T remove() {
-        return null;
+        if(isEmpty())
+            return null;
+        head = head.getNext();
     }
 }
