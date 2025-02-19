@@ -63,6 +63,14 @@ q4 -->|"b A| nop
 title: q-01
 nondetermenistic: false
 ---
+graph LR
+q0((q0))
+q1(((q1)))
+
+q0 --> |0| q0
+q0 --> |1| q1
+q1 --> |0| q0
+q1 --> |1| q1
 
 #!mermaid
 
