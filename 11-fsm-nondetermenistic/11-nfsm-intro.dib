@@ -1,0 +1,79 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!mermaid
+
+---
+title: intro
+nondetermenistic: true
+---
+graph LR
+
+q0((q0))
+q1(((q1)))
+
+q0 -->|0,1| q0
+q0 -->|1| q1
+
+#!mermaid
+
+---
+title: intro-2
+nondetermenistic: 1
+---
+graph LR
+
+q0((q0))
+q1(((q1)))
+
+q0 -->|0| q0
+q0 -->|1| q1
+
+#!mermaid
+
+---
+title: With-Stack
+nondetermenistic: true
+with-stack: ┴
+---
+graph LR
+
+q0((("q0")))
+q1(("q1"))
+q2(("q2"))
+q3(("q3"))
+q4(("q4"))
+q5((("q5")))
+
+q0 -->|"a ┴| push S"| q1
+q1 -->|"a A| push A"| q1
+q1 -->|"b A| nop
+        b S| nop  "| q2
+q2 -->|"b A| nop
+        b S| nop  "| q3
+q3 -->|"b S| pop S"| q5
+q3 -->|"b A| pop A"| q4
+q4 -->|"b A| nop
+        b S| nop  "| q2
+
+#!mermaid
+
+---
+title: q-01
+nondetermenistic: false
+---
+
+#!mermaid
+
+---
+title: q-02
+nondetermenistic: true
+---
+
+#!mermaid
+
+---
+title: q-03
+nondetermenistic: true
+---
