@@ -1,5 +1,4 @@
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 interface IFSM {
     boolean isComplete();
@@ -34,6 +33,12 @@ abstract class FSM implements IFSM {
             this.from = from;
             this.to = to;
             this.rules = rules;
+        }
+
+        public String toString() {
+            var fname = from != null ? from.name : "null";
+            var tname = to != null ? to.name : "null";
+            return String.format("%s --> %s: %s", fname, tname, Arrays.toString(rules));
         }
     }
 

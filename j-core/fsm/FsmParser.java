@@ -8,9 +8,9 @@ interface IFsmParser {
 }
 
 class FsmParser implements IFsmParser {
-    private List<FSM.State> states = new ArrayList<>();
-    private Set<String> alefBet = new HashSet<>();
-    private List<FSM.Transition> transitions = new ArrayList<>();
+    protected List<FSM.State> states = new ArrayList<>();
+    protected Set<String> alefBet = new HashSet<>();
+    protected List<FSM.Transition> transitions = new ArrayList<>();
 
     public FSM.State[] getStates() {
         return states.toArray(FSM.State[]::new);
@@ -114,6 +114,8 @@ class FsmParser implements IFsmParser {
     }
 
     protected FSM.State getState(String name) {
+        name = name.trim();
+        
         for (var state: states) {
             if (state.name.equals(name))
                 return state;
@@ -190,6 +192,9 @@ class FsmParser implements IFsmParser {
             var transition = new FSM.Transition(from, to, rules);
             transitions.add(transition);
         }
+    }
+
+    protected FsmParser() {
     }
 
     public FsmParser(String[] graph, boolean log) {

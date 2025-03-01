@@ -19,6 +19,7 @@ q5((("q5")))
 q0 -->|"a ┴| push S"| q1
 q1 -->|"a A| push A"| q1
 q1 -->|"b A| nop
+        b B| nop
         b S| nop  "| q2
 q2 -->|"b A| nop
         b S| nop  "| q3
