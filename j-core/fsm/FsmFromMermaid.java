@@ -32,7 +32,7 @@ class FsmFromMermaid {
             parser.getStates(),
             parser.getAlefBet(),
             parser.getTransitions(),
-            graph.props
+            new FSM.Props(new HashMap<>())
         );
 
         return new DetermenisticFsm(graphName, def, log);
