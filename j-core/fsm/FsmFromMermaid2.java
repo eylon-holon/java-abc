@@ -9,7 +9,7 @@ class FsmFromMermaid2 {
         var graph = MermaidFile2.loadGraph(graphName, filePath, log);
         if (log) print("graph '%s': loaded", graph.name);
 
-        var parser = new FsmParser(graph.lines, log);
+        var parser = FsmParser2.New(graph.lines, graph.props, log);
         if (log) print("graph '%s': parsed", graph.name);
 
         var def = new FSM.Def(
