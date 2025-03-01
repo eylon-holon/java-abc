@@ -105,8 +105,14 @@ class DetermenisticFsm extends FSM {
 
         var at = getAt(_def.alefBet, ch);
 
-        if (at == -1)
+        if (at == -1) {
+            if (_def.props.notfull()) {
+                if (trace)
+                    print("  '%s': undefined transition '%s'", from.name, ch);
+                return -1;
+            }
             return error(from, String.format("Undefined transition '%s'", ch));
+        }
 
         var next = _fsm[current][at];
 

@@ -8,10 +8,11 @@ class FsmFromMermaid2 {
         var def = new FSM.Def(
             parser.getStates(),
             parser.getAlefBet(),
-            parser.getTransitions()
+            parser.getTransitions(),
+            graph.props
         );
 
-        return graph.nondetermenistic() ?
+        return graph.props.nondetermenistic() ?
             new NondetermenisticFsm(graphName, def, log) : 
             new DetermenisticFsm(graphName, def, log);
     }    
