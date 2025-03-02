@@ -42,6 +42,20 @@ abstract class FSM implements IFSM {
         }
     }
 
+    public static class Def {
+        public State[] states;
+        public String[] alefBet;
+        public Transition[] transitions;
+        public Props props;
+
+        public Def(State[] states, String[] alefBet, Transition[] transitions, Props props) {
+            this.states = states;
+            this.alefBet = alefBet;
+            this.transitions = transitions;
+            this.props = props;
+        }
+    }
+
     public static class Props {
         public Map<String, String> _map;
 
@@ -102,6 +116,11 @@ abstract class FSM implements IFSM {
             return _map.size();
         }
 
+        public String title() {
+            var value = _map.get("title");
+            return value != null ? value : "unknown";
+        }
+
         public boolean notfull() {
             return 
                 hasTrueValue("not-full") ||
@@ -116,20 +135,6 @@ abstract class FSM implements IFSM {
             return 
                 _map.containsKey("withstack") ||
                 _map.containsKey("with-stack");
-        }
-    }
-
-    public static class Def {
-        public State[] states;
-        public String[] alefBet;
-        public Transition[] transitions;
-        public Props props;
-
-        public Def(State[] states, String[] alefBet, Transition[] transitions, Props props) {
-            this.states = states;
-            this.alefBet = alefBet;
-            this.transitions = transitions;
-            this.props = props;
         }
     }
 

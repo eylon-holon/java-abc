@@ -21,10 +21,14 @@ class FsmParser2 extends FsmParser {
         public String peek() {
             return lines[at];
         }
+
+        public int size() {
+            return lines.length;
+        }
     }
 
     public static IFsmParser New(String[] graph, FSM.Props props, boolean log) {
-        return props.withStack() ?
+        return !props.withStack() ?
             new FsmParser(graph, log) : 
             new FsmParser2(graph, props, log);
     }
@@ -74,6 +78,29 @@ class FsmParser2 extends FsmParser {
             regex.group(2).trim(),
             regex.group(3).trim()
         };
+    }
+
+    protected void parseRule(String rule) {
+        var split = rule.split("\\|");
+
+        if (split.length != 2) {
+            print("ERROR: failed to parse rule '%s' (split)", rule);
+            return;
+        }
+
+        var condition = split[0].trim().split("\\s");
+
+        if (condition.length != 2) {
+            print("ERROR: failed to parse rule '%s' (condition)", rule);
+            return;
+        }
+
+        if (condition[0].length() != 1) {
+            print("ERROR: failed to parse rule '%s' (letter)", rule);
+            return;
+        }
+
+        alefBet.add(condition[0].substring(0, 1));
     }
 
     protected void parseTransitions(LnItr it, boolean log) {
@@ -126,7 +153,9 @@ class FsmParser2 extends FsmParser {
 
         var rules = split[1].split("&");
         for (int i = 0; i < rules.length; i++) {
-            rules[i] = rules[i].trim();
+            var rule = rules[i].trim();
+            parseRule(rule);
+            rules[i] = rule;
         }
 
         // add transition

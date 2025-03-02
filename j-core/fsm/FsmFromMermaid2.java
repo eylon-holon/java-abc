@@ -10,7 +10,7 @@ class FsmFromMermaid2 {
         if (log) print("graph '%s': loaded", graph.name);
 
         var parser = FsmParser2.New(graph.lines, graph.props, log);
-        if (log) print("graph '%s': parsed", graph.name);
+        if (log) print("graph '%s': parsed (%d lines)", graph.name, graph.lines.length);
 
         var def = new FSM.Def(
             parser.getStates(),
@@ -21,8 +21,13 @@ class FsmFromMermaid2 {
 
         if (log) print("graph '%s': ready for fsm", graph.name);
 
-        return graph.props.nondetermenistic() ?
-            new NondetermenisticFsm(graphName, def, log) : 
+        if (graph.props.withStack())
+            return new FsmWithStack(graphName, def, log);
+
+        if (graph.props.nondetermenistic())
+            return new NondetermenisticFsm(graphName, def, log);
+
+        return
             new DetermenisticFsm(graphName, def, log);
     }    
 }
