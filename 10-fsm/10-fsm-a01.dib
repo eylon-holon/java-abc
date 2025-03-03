@@ -20,6 +20,11 @@ q1 -->|a,b| q0
 title: q-02
 ---
 graph LR
+q0((q0))
+q1(((q1)))
+
+q0 -->|a,b| q1
+q1 -->|a,b| q1
 
 #!mermaid
 
@@ -27,3 +32,94 @@ graph LR
 title: q-03
 ---
 graph LR
+q0((q0))
+q1(((q1)))
+
+q0 -->|0| q0
+q0 -->|1| q1
+q1 -->|1| q1
+q1 -->|0| q0
+
+#!mermaid
+
+---
+title: q-04
+---
+graph LR
+q0((q0))
+q1(((q1)))
+
+q0 -->|0| q0
+q0 -->|1| q1
+q1 -->|0| q1
+q1 -->|1| q0
+
+#!mermaid
+
+---
+title: q-05
+---
+graph LR
+q0((q0))
+q1(((q1)))
+q2((q2))
+
+q0 -->|1| q1
+q1 -->|0,1| q1
+q0 -->|0| q2
+q2 -->|0,1| q2
+
+#!mermaid
+
+---
+title: q-06
+---
+graph LR
+q0((q0))
+q1(((q1)))
+
+q0 -->|0| q0
+q0 -->|1| q1
+q1 -->|0,1| q1
+
+#!mermaid
+
+---
+title: q-07
+---
+graph LR
+q0(((q0)))
+
+q0 -->|0,1| q0
+
+#!mermaid
+
+---
+title: q-08
+---
+graph LR
+q0(((q0)))
+q1(((q1)))
+q2((q2))
+
+q0 -->|0| q0
+q0 -->|1| q1
+q1 -->|0| q1
+q1 -->|1| q2
+q2 -->|0,1| q2
+
+#!mermaid
+
+---
+title: q-09
+---
+graph LR
+q0((q0))
+q1(((q1)))
+q2((q2))
+
+q0 -->|0| q0
+q0 -->|1| q1
+q1 -->|0| q1
+q1 -->|1| q2
+q2 -->|0,1| q2
