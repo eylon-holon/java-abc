@@ -68,6 +68,19 @@ nondetermenistic: false
 
 ---
 title: q-02
+q0(((q0)))
+q1((q1))
+q2(((q2)))
+n1((n1))
+n2(((n2)))
+
+q0-->|a,b|q0
+q0-->|a|q1
+q0-->|b|n1
+q1-->|a|q1
+q1-->|b|q2
+n1-->|a|n2
+n1-->|b|n1
 nondetermenistic: true
 ---
 
@@ -75,5 +88,12 @@ nondetermenistic: true
 
 ---
 title: q-03
+q0((q0))
+q1(((q1)))
+q2(((q2)))
+
+q0-->|a,b|q0
+q0-->|a|q1
+q0-->|b|q2
 nondetermenistic: true
 ---
