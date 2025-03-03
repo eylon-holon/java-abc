@@ -5,9 +5,9 @@ class MermaidFile2 {
     public static class Graph {
         public String name;
         public String[] lines;
-        public Map<String, String> props;
+        public FSM.Props props;
 
-        public Graph(String name, String[] lines, Map<String, String> props) {
+        public Graph(String name, String[] lines, FSM.Props props) {
             this.name = name;
             this.lines = lines;
             this.props = props;
@@ -15,35 +15,6 @@ class MermaidFile2 {
 
         public String name() {
             return props.get("title");
-        }
-
-        public boolean nondetermenistic() {
-            var value = props.get("nondetermenistic");
-
-            if (value == null)
-                return false;
-
-            if (theyAreSame(value, "true"))
-                return true;
-
-            if (theyAreSame(value, "false"))
-                return false;
-
-            if (theyAreSame(value, "1"))
-                return true;
-
-            if (theyAreSame(value, "0"))
-                return false;
-
-            if (theyAreSame(value, "yes"))
-                return true;
-
-            if (theyAreSame(value, "no"))
-                return false;
-
-            MermaidFile2.print("WARN: 'nondetermenistic' has a wrong value: '%s'", value);
-
-            return false;
         }
 
         public String toString() {
@@ -80,25 +51,25 @@ class MermaidFile2 {
         return lines.toArray(String[]::new);
     }
 
-    private static Map<String, String> parseProperties(String text, boolean log) {
-        var props = new HashMap<String, String>();
+    private static FSM.Props parseProperties(String text, boolean log) {
+        var map = new HashMap<String, String>();
 
         var docs = text.split("(?m)(^---$)");
 
         if (docs.length < 3) {
             if (log) print("WARN ===%s===\nYAML header is not found", text);
-            return props;
+            return new FSM.Props(map);
         }
 
         var parser = new Yaml();
         Map<String, Object> yaml = parser.load(docs[1]);
 
-        yaml.forEach((k, v) -> props.put(k, v.toString()));
+        yaml.forEach((k, v) -> map.put(k.toLowerCase(), v.toString()));
 
-        return props;
+        return new FSM.Props(map);
     }
 
-    private static void parseGraphNameIfTitleIsMissing(String[] lines, Map<String, String> props) {
+    private static void parseGraphNameIfTitleIsMissing(String[] lines, FSM.Props props) {
         if (props.containsKey("title"))
             return;
 
