@@ -128,7 +128,9 @@ abstract class FSM implements IFSM {
         }
 
         public boolean nondetermenistic() {
-            return hasTrueValue("nondetermenistic");
+            return
+                hasTrueValue("non-determenistic") ||
+                hasTrueValue("nondetermenistic");
         }
 
         public boolean withStack() {
