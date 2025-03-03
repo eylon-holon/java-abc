@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 class FsmFromMermaid {
     public static IFSM fsm_101() {
         var q0 = new FSM.State(0, "q0", false);
@@ -11,7 +13,8 @@ class FsmFromMermaid {
         var def = new FSM.Def(
             new FSM.State[] {q0, q1, q2},
             new String[] {"0", "1"},
-            new FSM.Transition[] {r0, r1, r2}
+            new FSM.Transition[] {r0, r1, r2},
+            new FSM.Props(new HashMap<>())
         );
 
         var fsm = new DetermenisticFsm("101", def, false);
@@ -28,7 +31,8 @@ class FsmFromMermaid {
         var def = new FSM.Def(
             parser.getStates(),
             parser.getAlefBet(),
-            parser.getTransitions()
+            parser.getTransitions(),
+            new FSM.Props(new HashMap<>())
         );
 
         return new DetermenisticFsm(graphName, def, log);
