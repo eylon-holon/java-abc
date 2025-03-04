@@ -1,3 +1,5 @@
+import java.util.*;
+
 interface IFSM {
     boolean isComplete();
     String[] getNotCompletedStates();
@@ -6,6 +8,8 @@ interface IFSM {
     boolean accept(String word);
     boolean[] accept(String... many);
 }
+
+// todo: full: false --> then not-accepted instead of no-transition-error
 
 abstract class FSM implements IFSM {
     public static class State {
@@ -30,19 +34,109 @@ abstract class FSM implements IFSM {
             this.to = to;
             this.rules = rules;
         }
+
+        public String toString() {
+            var fname = from != null ? from.name : "null";
+            var tname = to != null ? to.name : "null";
+            return String.format("%s --> %s: %s", fname, tname, Arrays.toString(rules));
+        }
     }
 
     public static class Def {
         public State[] states;
         public String[] alefBet;
         public Transition[] transitions;
-        public boolean nondetermenistic;
+        public Props props;
 
-        public Def(State[] states, String[] alefBet, Transition[] transitions) {
+        public Def(State[] states, String[] alefBet, Transition[] transitions, Props props) {
             this.states = states;
             this.alefBet = alefBet;
             this.transitions = transitions;
-            this.nondetermenistic = false;
+            this.props = props;
+        }
+    }
+
+    public static class Props {
+        public Map<String, String> _map;
+
+        public Props(Map<String, String> map) {
+            _map = map;
+        }
+
+        private static boolean theyAreSame(String lhs, String rhs) {
+            if (lhs == null && rhs == null)
+                return true;
+            if (lhs == null || rhs == null)
+                return false;
+            return 0 == lhs.compareToIgnoreCase(rhs);
+        }
+    
+        public boolean hasTrueValue(String key) {
+            var value = _map.get(key);
+
+            if (value == null)
+                return false;
+
+            if (theyAreSame(value, "true"))
+                return true;
+
+            if (theyAreSame(value, "false"))
+                return false;
+
+            if (theyAreSame(value, "1"))
+                return true;
+
+            if (theyAreSame(value, "0"))
+                return false;
+
+            if (theyAreSame(value, "yes"))
+                return true;
+
+            if (theyAreSame(value, "no"))
+                return false;
+
+            FSM.print("WARN: '%s' has a wrong value: '%s'", key, value);
+
+            return false;
+        }
+
+        public boolean containsKey(String key) {
+            return _map.containsKey(key);
+        }
+
+        public String get(String key) {
+            return _map.get(key);
+        }
+
+        public void put(String key, String value) {
+            _map.put(key, value);
+        }
+
+        public int size() {
+            return _map.size();
+        }
+
+        public String title() {
+            var value = _map.get("title");
+            return value != null ? value : "unknown";
+        }
+
+        public boolean notfull() {
+            return 
+                hasTrueValue("not-full") ||
+                hasTrueValue("notfull");
+        }
+
+        public boolean nondetermenistic() {
+            return
+                hasTrueValue("non-determenistic") ||
+                hasTrueValue("nondetermenistic");
+        }
+
+        public boolean withStack() {
+            return 
+                _map.containsKey("withstack") ||
+                _map.containsKey("with-stack");
         }
     }
 
