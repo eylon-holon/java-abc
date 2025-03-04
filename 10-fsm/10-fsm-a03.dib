@@ -66,6 +66,137 @@ title: q-04
 graph LR
 q0((q0))
 q1(((q1)))
+q2((q2))
 q0 -->|a|q0
 q0 -->|b|q1
-q1 -->|a,b|q1
+q1 -->|a|q2
+q1 -->|b|q1
+q2 -->|a,b|q2
+
+#!mermaid
+
+---
+title: q-05
+---
+graph LR
+q0((q0))
+q1((q1))
+q2(((q2)))
+q3((q3))
+q4(((q4)))
+q5(((q5)))
+q0 -->|b|q1
+q0 -->|a,e|q2
+q2 -->|a,b,e|q3
+q3 -->|a,b,e|q3
+q1 -->|a|q4
+q4 -->|b|q5
+q1 -->|b,e|q3
+q4 -->|a,e|q3
+q5 -->|a,b,e|q3
+
+#!mermaid
+
+---
+title: q-06
+---
+graph LR
+q0(((q0)))
+q1((q1))
+q2((q2))
+q3(((q3)))
+q4((q4))
+q0 -->|b|q1
+q1 -->|b|q0
+q0 -->|a|q2
+q2 -->|b|q0
+q1 -->|a|q3
+q3 -->|b|q1
+q2 -->|a|q4
+q3 -->|a|q4
+q4 -->|a,b|q4
+
+#!mermaid
+
+---
+title: q-07
+---
+graph LR
+q0(((q0)))
+q1((q1))
+q2((q2))
+q3((q3))
+q4(((q4)))
+q5((q5))
+
+q0 -->|a|q1
+q0 -->|b|q3
+
+q1 -->|a|q2
+q1 -->|b|q4
+
+q2 -->|a|q0
+q2 -->|b|q5
+
+q3 -->|a,b|q3
+
+q4 -->|a,b|q3
+
+q5 -->|a|q3
+q5 -->|b|q4
+
+#!mermaid
+
+---
+title: q-08
+---
+graph LR
+q0(((q0)))
+q1((q1))
+q2((q2))
+
+q3((q3))
+q4((q4))
+q5(((q5)))
+
+q6(((q6)))
+q7((q7))
+q8((q8))
+
+q9((q9))
+qa(((qa)))
+qb(((qb)))
+
+qc((qc))
+
+q0 -->|a|q1
+q1 -->|a|q2
+q2 -->|a|q0
+
+q0 -->|b|q3
+q1 -->|b|q6
+q2 -->|b|q9
+
+q3 -->|b|q4
+q4 -->|b|q5
+q5 -->|b|q3
+
+q6 -->|b|q7
+q7 -->|b|q8
+q8 -->|b|q6
+
+q9 -->|b|qa
+qa -->|b|qb
+qb -->|b|q9
+
+q3 -->|a|qc
+q4 -->|a|qc
+q5 -->|a|qc
+q6 -->|a|qc
+q7 -->|a|qc
+q8 -->|a|qc
+q9 -->|a|qc
+qa -->|a|qc
+qb -->|a|qc
+
+qc -->|a,b|qc
