@@ -141,6 +141,10 @@ class DetermenisticFsm extends FSM {
     }
 
     public boolean accept(String word, boolean trace) {
+        trace |= _def.props.trace();
+
+        word = word.trim();
+
         if (trace)
             print("FSM['%s']: accepting word '%s'", _name, word);
 
