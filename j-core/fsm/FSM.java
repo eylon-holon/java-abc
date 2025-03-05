@@ -138,6 +138,11 @@ abstract class FSM implements IFSM {
                 _map.containsKey("withstack") ||
                 _map.containsKey("with-stack");
         }
+
+        public boolean trace() {
+            return 
+                hasTrueValue("trace");
+        }
     }
 
     protected static void print(String fmt, Object... args) {
