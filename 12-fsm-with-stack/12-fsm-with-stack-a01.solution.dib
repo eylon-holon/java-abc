@@ -8,6 +8,7 @@
 title: Q-01
 with-stack: ┴
 not-full: 1
+trace: 0
 ---
 graph LR
 
@@ -30,6 +31,7 @@ q2 --> |"b S|pop S"| q3
 title: Q-02
 with-stack: ┴
 not-full: 1
+trace: 0
 ---
 graph LR
 
