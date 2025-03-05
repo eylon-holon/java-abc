@@ -1,10 +1,16 @@
 import java.util.*;
 import java.util.regex.Pattern;
 
-class FsmParser {
-    private List<FSM.State> states = new ArrayList<>();
-    private Set<String> alefBet = new HashSet<>();
-    private List<FSM.Transition> transitions = new ArrayList<>();
+interface IFsmParser {
+    FSM.State[] getStates();
+    String[] getAlefBet();
+    FSM.Transition[] getTransitions();
+}
+
+class FsmParser implements IFsmParser {
+    protected List<FSM.State> states = new ArrayList<>();
+    protected Set<String> alefBet = new HashSet<>();
+    protected List<FSM.Transition> transitions = new ArrayList<>();
 
     public FSM.State[] getStates() {
         return states.toArray(FSM.State[]::new);
@@ -23,25 +29,25 @@ class FsmParser {
         return transitions.toArray(FSM.Transition[]::new);
     }
 
-    private static void print(String fmt, Object... args) {
+    protected static void print(String fmt, Object... args) {
         System.out.println(String.format(fmt, args));
     }
 
-    private static String removeSpaces(String ln) {
+    protected static String removeSpaces(String ln) {
         return ln.replaceAll("\\s","");
     }
 
-    private boolean itsAComment(String ln) {
+    protected boolean itsAComment(String ln) {
         return ln.startsWith("%%");
     }
 
-    private boolean itsAStateLine(String ln) {
+    protected boolean itsAStateLine(String ln) {
         ln = removeSpaces(ln);
         return
             ln.contains("((") && ln.contains("))");
     }
 
-    private boolean itsATransitionLine(String ln) {
+    protected boolean itsATransitionLine(String ln) {
         ln = removeSpaces(ln);
 
         var hasArrow = 
@@ -62,7 +68,7 @@ class FsmParser {
         return true;
     }
 
-    private static boolean parseOk(String def) {
+    protected static boolean parseOk(String def) {
         if (def.contains("(((") && def.contains(")))"))
             return true;
 
@@ -72,14 +78,14 @@ class FsmParser {
         return false;
     }
 
-    private static boolean parseStart(String def) {
+    protected static boolean parseStart(String def) {
         if (def.contains(":::start"))
             return true;
 
         return false;
     }
 
-    private FSM.State parseState(String def) {
+    protected FSM.State parseState(String def) {
         var id = states.size();
         var name = def.split(Pattern.quote("(("))[0];
         var ok = parseOk(def);
@@ -92,7 +98,7 @@ class FsmParser {
         return new FSM.State(id, name, ok);
     }
 
-    private void parseStates(String ln, boolean log) {
+    protected void parseStates(String ln, boolean log) {
         ln = removeSpaces(ln);
         var defs = ln.split(";");
 
@@ -107,7 +113,9 @@ class FsmParser {
         }
     }
 
-    private FSM.State getState(String name) {
+    protected FSM.State getState(String name) {
+        name = name.trim();
+        
         for (var state: states) {
             if (state.name.equals(name))
                 return state;
@@ -115,7 +123,7 @@ class FsmParser {
         return null;
     }
 
-    private FSM.State[] parseFromStates(String ln) {
+    protected FSM.State[] parseFromStates(String ln) {
         var lhs = ln.contains("-") ? 
             ln.split("-")[0] : 
             ln.split("=")[0];
@@ -137,7 +145,7 @@ class FsmParser {
         return states.toArray(FSM.State[]::new);
     }
 
-    private FSM.State parseToState(String ln) {
+    protected FSM.State parseToState(String ln) {
         var parts = ln.split(Pattern.quote("|"));
         var name = parts[parts.length-1];
 
@@ -149,7 +157,7 @@ class FsmParser {
         return state;
     }
 
-    private String[] parseRules(String ln) {
+    protected String[] parseRules(String ln) {
         var split = ln.split(Pattern.quote("|"));
         var letters = split[1].split(",");
 
@@ -168,7 +176,7 @@ class FsmParser {
         return rules;
     }
 
-    private void parseTransition(String ln, boolean log) {
+    protected void parseTransition(String ln, boolean log) {
         ln = removeSpaces(ln);
 
         var froms = parseFromStates(ln);
@@ -186,6 +194,9 @@ class FsmParser {
         }
     }
 
+    protected FsmParser() {
+    }
+
     public FsmParser(String[] graph, boolean log) {
         for (var ln: graph) {
             if (itsAComment(ln))
@@ -197,5 +208,5 @@ class FsmParser {
             if (itsATransitionLine(ln))
                 parseTransition(ln, log);
         }
-    }    
+    }
 }
