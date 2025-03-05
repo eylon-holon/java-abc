@@ -54,7 +54,7 @@ class MermaidFile2 {
     private static FSM.Props parseProperties(String text, boolean log) {
         var map = new HashMap<String, String>();
 
-        var docs = text.split("(?m)(^---$)");
+        var docs = text.split("(?m)(^---.*$)");
 
         if (docs.length < 3) {
             if (log) print("WARN ===%s===\nYAML header is not found", text);

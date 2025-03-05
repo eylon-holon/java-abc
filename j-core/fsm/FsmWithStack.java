@@ -254,7 +254,7 @@ class FsmWithStack extends FSM {
             var transitions = matchRules(current, letter);
             
             if (transitions.length == 0)
-                return _notfull && !trace ? false : notAcceptedWithError(current, "Can't find transition for letter '%s'", letter);
+                return _notfull && !trace ? false : notAcceptedWithError(current, "Can't find transition for condition '%s %s'", letter, _stack.peek());
 
             if (transitions.length > 1)
                 return notAcceptedWithError(current, "Found %d transitions for letter '%s'; nondeterministic FSM┴ is not yet supported", transitions.length, letter);
