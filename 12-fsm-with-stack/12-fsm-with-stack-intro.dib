@@ -8,6 +8,7 @@
 title: a^n-b^n
 with-stack: ┴
 not-full: 1
+trace: 0
 ---
 graph LR
 

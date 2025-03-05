@@ -47,13 +47,10 @@ class FsmWithStack extends FSM {
     private final Def _def;
     private final boolean _notfull;
 
-    private Stack _stack;
-
     public FsmWithStack(String name, Def def, boolean traceInit) {
         _name = name;
         _def = def;
         _notfull = def.props.notfull();
-        _stack = new Stack();
     }
 
     public boolean isComplete() {
@@ -69,7 +66,7 @@ class FsmWithStack extends FSM {
     }
 
     protected boolean notAcceptedWithError(State in, String fmt, Object... args) {
-        print("ERROR in %s: %s", in.name, String.format(fmt, args));
+        print("  ERROR in %s: %s", in.name, String.format(fmt, args));
         return false;
     }
 
@@ -98,7 +95,7 @@ class FsmWithStack extends FSM {
         };
     }
 
-    protected boolean termsAreMatched(State state, String rule, String letter) {
+    protected boolean termsAreMatched(State state, Stack stack, String rule, String letter) {
         var terms = parseTerms(rule);
 
         if (terms == null)
@@ -107,13 +104,13 @@ class FsmWithStack extends FSM {
         if (!letter.equals(terms[0]))
             return false;
 
-        if (!_stack.peek().equals(terms[1]))
+        if (!stack.peek().equals(terms[1]))
             return false;
 
         return true;
     }
 
-    protected Transition[] matchRules(State state, String letter) {
+    protected Transition[] matchRules(State state, Stack stack, String letter) {
         var transitions = new ArrayList<Transition>();
 
         for (var tr: _def.transitions) {
@@ -121,7 +118,7 @@ class FsmWithStack extends FSM {
                 continue;
 
             for (var rule: tr.rules) {
-                if (!termsAreMatched(state, rule, letter))
+                if (!termsAreMatched(state, stack, rule, letter))
                     continue;
 
                 var matched = new Transition(state, tr.to, new String[] {rule});
@@ -169,7 +166,7 @@ class FsmWithStack extends FSM {
         return false;
     }
 
-    protected boolean itsPush(String[] ops) {
+    protected boolean itsPush(Stack stack, String[] ops) {
         var op = ops[0].trim().toLowerCase();
 
         if (!op.equals("push"))
@@ -180,12 +177,12 @@ class FsmWithStack extends FSM {
             return false;
         }
 
-        _stack.push(ops[1]);
+        stack.push(ops[1]);
 
         return true;
     }
 
-    protected boolean itsPop(String[] ops) {
+    protected boolean itsPop(Stack stack, String[] ops) {
         var op = ops[0].trim().toLowerCase();
 
         if (!op.equals("pop"))
@@ -201,16 +198,16 @@ class FsmWithStack extends FSM {
             return false;
         }
 
-        if (!_stack.peek().equals(letter)) {
-            print("WARN: Operation POP: letter '%s' is different from the one in stack ([%s])", letter, _stack);
+        if (!stack.peek().equals(letter)) {
+            print("WARN: Operation POP: letter '%s' is different from the one in stack ([%s])", letter, stack);
         }
 
-        _stack.pop();
+        stack.pop();
 
         return true;
     }
 
-    protected State toNextState(State state, String letter, Transition tr, boolean trace) {
+    protected State toNextState(State state, Stack stack, String letter, Transition tr, boolean trace) {
         var rule = tr.rules[0];
         var ops = parseOperation(state, rule);
 
@@ -221,28 +218,31 @@ class FsmWithStack extends FSM {
             if (itsNop(ops))
                 break;
 
-            if (itsPush(ops))
+            if (itsPush(stack, ops))
                 break;
 
-            if (itsPop(ops))
+            if (itsPop(stack, ops))
                 break;
 
             print("Unknown operation '%s' in rule '%s'", ops[0], rule);
             return null;
         } while (false);
 
-        if (trace) print("  '%s': %s --> %s (%s) [%s]", letter, state.name, tr.to.name, tr.rules[0], _stack);
+        if (trace) print("  '%s': %s --> %s (%s) [%s]", letter, state.name, tr.to.name, tr.rules[0], stack);
 
         return tr.to;
     }
 
     public boolean accept(String word, boolean trace) {
+        trace |= _def.props.trace();
+
         word = word.trim();
 
         if (trace)
             print("FSM┴['%s']: accepting word '%s'", _name, word);
 
         var current = _def.states[0];
+        var stack = new Stack();
 
         if (word.length() == 0)
             return current.ok;
@@ -251,16 +251,16 @@ class FsmWithStack extends FSM {
             if (!inAlefBet(letter))
                 return _notfull && !trace ? false : notAcceptedWithError(current, "Letter '%s' is not in alefBet", letter);
 
-            var transitions = matchRules(current, letter);
+            var transitions = matchRules(current, stack, letter);
             
             if (transitions.length == 0)
-                return _notfull && !trace ? false : notAcceptedWithError(current, "Can't find transition for condition '%s %s'", letter, _stack.peek());
+                return _notfull && !trace ? false : notAcceptedWithError(current, "Can't find transition for condition '%s %s'", letter, stack.peek());
 
             if (transitions.length > 1)
                 return notAcceptedWithError(current, "Found %d transitions for letter '%s'; nondeterministic FSM┴ is not yet supported", transitions.length, letter);
 
             var rule = transitions[0].rules[0];
-            var next = toNextState(current, letter, transitions[0], trace);
+            var next = toNextState(current, stack, letter, transitions[0], trace);
 
             if (next == null)
                 return notAcceptedWithError(current, "Failed to process rule '%s' for letter '%s'", rule, letter);

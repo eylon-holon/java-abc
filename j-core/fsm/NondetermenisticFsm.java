@@ -166,6 +166,10 @@ class NondetermenisticFsm extends FSM {
     }
 
     public boolean accept(String word, boolean trace) {
+        trace |= _def.props.trace();
+
+        word = word.trim();
+
         if (trace)
             print("NFSM['%s']: accepting word '%s'", _name, word);
 
