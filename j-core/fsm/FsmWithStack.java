@@ -214,6 +214,8 @@ class FsmWithStack extends FSM {
         if (ops == null)
             return null;
 
+        var fromPeek = stack.peek();
+
         do {
             if (itsNop(ops))
                 break;
@@ -228,7 +230,7 @@ class FsmWithStack extends FSM {
             return null;
         } while (false);
 
-        if (trace) print("  '%s': %s --> %s (%s) [%s]", letter, state.name, tr.to.name, tr.rules[0], stack);
+        if (trace) print("  '%s %s': %s --> %s (%s) [%s]", letter, fromPeek, state.name, tr.to.name, tr.rules[0], stack);
 
         return tr.to;
     }
