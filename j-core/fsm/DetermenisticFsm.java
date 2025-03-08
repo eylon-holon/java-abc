@@ -165,7 +165,7 @@ class DetermenisticFsm extends FSM {
         var ok = _def.states[current].ok;
 
         if (trace)
-            print("FSM['%s']: '%s' is %s", _name, word, ok ? "accepted" : "wrong");
+            print("FSM['%s']: '%s' is %s", _name, word, ok ? "accepted" : "rejected");
 
         return ok;
     }
