@@ -270,6 +270,9 @@ class FsmWithStack extends FSM {
             current = next;
         }
 
+        if (trace)
+            print("FSM┴['%s']: '%s' is %s", _name, word, current.ok ? "accepted" : "rejected");
+
         return current.ok;
     }
 
