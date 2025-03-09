@@ -1,0 +1,16 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!mermaid
+
+---
+title: accepting-with-full-false
+notfull: true
+---
+graph LR
+
+q0((q0))
+q1(((q1)))
+
+q0 -->|1| q1
