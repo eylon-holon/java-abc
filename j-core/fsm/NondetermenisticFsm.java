@@ -184,7 +184,7 @@ class NondetermenisticFsm extends FSM {
         if (trace) {
             for (int i = log.size(); i-- > 0; )
                 print(log.get(i));
-            print("NFSM['%s']: '%s' is %s", _name, word, ok ? "accepted" : "wrong");
+            print("NFSM['%s']: '%s' is %s", _name, word, ok ? "accepted" : "rejected");
         }
 
         return ok;
