@@ -54,7 +54,7 @@ class MermaidFile2 {
     private static FSM.Props parseProperties(String text, boolean log) {
         var map = new HashMap<String, String>();
 
-        var docs = text.split("(?m)(^---$)");
+        var docs = text.split("(?m)(^---.*$)");
 
         if (docs.length < 3) {
             if (log) print("WARN ===%s===\nYAML header is not found", text);
@@ -111,17 +111,27 @@ class MermaidFile2 {
         var sections = DibFile.getAllSections("#!mermaid", path, log);
         
         var namesFound = new ArrayList<String>();
+        Graph first = null; 
 
         for (var section: sections) {
             var graph = parseGraph(section, log);
 
             if (theyAreSame(graphName, graph.name())) {
                 if (log) print("%s: %s is found", path, graphName);
-                return graph;
+
+                if (first != null) {
+                    print("%s: ERROR: two graphs with the same name '%s'", path, graphName);
+                    return null;
+                }
+
+                first = graph;
             }
 
             namesFound.add(graph.name());
         }
+
+        if (first != null)
+            return first;
 
         var namesInFile = Arrays.toString(namesFound.toArray());
         print("%s: '%s' is not found; (found graphs: %s)", path, graphName, namesInFile);
