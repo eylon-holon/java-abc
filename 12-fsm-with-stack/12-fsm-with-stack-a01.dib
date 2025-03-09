@@ -6,15 +6,48 @@
 
 ---
 title: Q-01
+with-stack: ┴
+not-full: 1
+trace: 0
 ---
 graph LR
+
+q0(((q0)))
+q1((q1))
+q2((q2))
+q3(((q3)))
+
+q0 --> |"a┴|push SAA"| q1
+q1-->  |"bA|pop A"| q2
+q2-->|"bA|pop A"| q2
+q1--> |"aA| push AAA"| q1
+q2-->|"bS|pop S"| q3
 
 #!mermaid
 
 ---
 title: Q-02
+with-stack: ┴
+not-full: 1
+trace: 0
 ---
 graph LR
+
+q0((q0))
+q1((q1))
+q2((q2))
+q3((q3))
+qf(((qf)))
+
+q0-->|"a ┴| push S"|q1
+q1-->|"a S| push A"|q2
+q2-->|"a A| push A"|q0
+q0-->|"a A| push A"|q1
+q1-->|"a A| push A"|q2
+q0-->|"b AAS| pop AAS"| qf
+q0-->|"b AAA| pop AAA"| q3
+q3-->|"b AAA| pop AAA"| q3
+q3-->|"b AAS| pop AAS"| qf
 
 #!mermaid
 
