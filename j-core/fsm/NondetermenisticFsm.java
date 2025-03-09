@@ -166,6 +166,10 @@ class NondetermenisticFsm extends FSM {
     }
 
     public boolean accept(String word, boolean trace) {
+        trace |= _def.props.trace();
+
+        word = word.trim();
+
         if (trace)
             print("NFSM['%s']: accepting word '%s'", _name, word);
 
@@ -180,7 +184,7 @@ class NondetermenisticFsm extends FSM {
         if (trace) {
             for (int i = log.size(); i-- > 0; )
                 print(log.get(i));
-            print("NFSM['%s']: '%s' is %s", _name, word, ok ? "accepted" : "wrong");
+            print("NFSM['%s']: '%s' is %s", _name, word, ok ? "accepted" : "rejected");
         }
 
         return ok;

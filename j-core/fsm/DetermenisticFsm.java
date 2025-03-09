@@ -116,8 +116,11 @@ class DetermenisticFsm extends FSM {
 
         var next = _fsm[current][at];
 
-        if (next == -1)
-            return error(from, String.format("No transition for '%s' is defined", ch));
+        if (next == -1) {
+            if (!_def.props.notfull() || trace)
+                print("  '%s': No transition for '%s' is defined", from.name, ch);
+            return -1;
+        }
 
         var to = _def.states[next];
         assert to != null;
@@ -141,6 +144,10 @@ class DetermenisticFsm extends FSM {
     }
 
     public boolean accept(String word, boolean trace) {
+        trace |= _def.props.trace();
+
+        word = word.trim();
+
         if (trace)
             print("FSM['%s']: accepting word '%s'", _name, word);
 
@@ -161,7 +168,7 @@ class DetermenisticFsm extends FSM {
         var ok = _def.states[current].ok;
 
         if (trace)
-            print("FSM['%s']: '%s' is %s", _name, word, ok ? "accepted" : "wrong");
+            print("FSM['%s']: '%s' is %s", _name, word, ok ? "accepted" : "rejected");
 
         return ok;
     }
