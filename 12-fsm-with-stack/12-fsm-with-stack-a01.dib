@@ -12,22 +12,39 @@ graph LR
 q0(((q0)))
 q1((q1))
 q2((q2))
-q3((q3))
-q0 --> |"a ┴|push SSS"| q1
-q1-->|"a S|push AAA"| q1
-q1-->|"b S|pop S"|q3
-q1-->|"b A|pop A"|q2
-q2-->|"b A|pop A"|q2
-q2-->|"b S|pop S"|q3
-q3-->|"b S|pop S"|q3
-q3-->|" ┴|nop"|q0
+q3(((q3)))
+q0 --> |"a ┴|push SAA"| q1
+q1-->|"a A|push AAA"| q1
+q1-->|"b A|pop A"| q2
+q2-->|"b A|pop A"| q2
+q2-->|"b S|pop S"| q3
 
 #!mermaid
 
 ---
 title: Q-02
+with-stack: ┴
+not-full: 1
 ---
 graph LR
+
+q0((q0))
+q1((q1))
+q2((q2))
+q3((q3))
+q4(((q4)))
+
+q0-->|"a ┴|nop"| q1
+q1-->|"a ┴|nop"| q2
+q1-->|"a A|nop"| q2
+q1-->|"a S|nop"| q2
+q2-->|"a ┴|push S"| q3
+q2-->|"a S|push A"| q3
+q2-->|"a A|push A"| q3
+q3-->|"a A|nop"| q1
+q3-->|"a S|nop"| q1
+q3-->|"b A|pop A"| q3
+q3-->|"b S|pop S"| q4
 
 #!mermaid
 
