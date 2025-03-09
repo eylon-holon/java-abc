@@ -105,13 +105,22 @@ class DetermenisticFsm extends FSM {
 
         var at = getAt(_def.alefBet, ch);
 
-        if (at == -1)
+        if (at == -1) {
+            if (_def.props.notfull()) {
+                if (trace)
+                    print("  '%s': undefined transition '%s'", from.name, ch);
+                return -1;
+            }
             return error(from, String.format("Undefined transition '%s'", ch));
+        }
 
         var next = _fsm[current][at];
 
-        if (next == -1)
-            return error(from, String.format("No transition for '%s' is defined", ch));
+        if (next == -1) {
+            if (!_def.props.notfull() || trace)
+                print("  '%s': No transition for '%s' is defined", from.name, ch);
+            return -1;
+        }
 
         var to = _def.states[next];
         assert to != null;
@@ -135,6 +144,10 @@ class DetermenisticFsm extends FSM {
     }
 
     public boolean accept(String word, boolean trace) {
+        trace |= _def.props.trace();
+
+        word = word.trim();
+
         if (trace)
             print("FSM['%s']: accepting word '%s'", _name, word);
 
@@ -155,7 +168,7 @@ class DetermenisticFsm extends FSM {
         var ok = _def.states[current].ok;
 
         if (trace)
-            print("FSM['%s']: '%s' is %s", _name, word, ok ? "accepted" : "wrong");
+            print("FSM['%s']: '%s' is %s", _name, word, ok ? "accepted" : "rejected");
 
         return ok;
     }
@@ -172,7 +185,9 @@ class DetermenisticFsm extends FSM {
         var states = new String[_def.states.length];
         for (int i = 0; i < _def.states.length; i++) {
             var st = _def.states[i];
-            states[i] = String.format("%s(%d)", st.name, st.id); 
+            states[i] = st.ok ? 
+                String.format("%s((%d))", st.name, st.id) :
+                String.format("%s(%d)", st.name, st.id); 
         }
 
         sb
