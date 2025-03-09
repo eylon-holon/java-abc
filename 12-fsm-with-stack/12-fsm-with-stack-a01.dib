@@ -16,21 +16,50 @@ q1((q1))
 q2((q2))
 q3(((q3)))
 
-q0 --> |"a ┴|push AAA"| q1
+q0 --> |"a ┴|push SAA"| q1
+q1 --> |"a A| push AAA"| q1
 
-q1 --> |
+q1 --> |"b A| pop A"| q2
+q2 --> |"b A| pop A"| q2
+
+q2 --> |"b S| pop S"| q3
 
 #!mermaid
 
 ---
 title: Q-02
+with-stack: ┴
+not-full: 1
 ---
 graph LR
+
+q0((q0))
+q1((q1))
+q2((q2))
+q3((q3))
+q4(((q4)))
+
+q0 --> |"a ┴| push S  
+         a S| push A  
+         a A| push A"| q1
+
+q1 --> |"a S| nop| 
+         a A| nop"| q2
+
+q2 --> |"a S| nop
+        a A| nop"| q0
+        
+q0 --> |"b S| pop S"| q4
+q0 --> |"b A| pop A"| q3
+q3 --> |"b A| pop A"| q3
+q3 --> |"b S| pop S"| q4
 
 #!mermaid
 
 ---
 title: Q-03
+with-stack: ┴
+not-full: 1
 ---
 graph LR
 
