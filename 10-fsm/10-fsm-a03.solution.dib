@@ -120,25 +120,6 @@ ba --> |b| bab
 #!mermaid
 
 ---
-title: q-03-a
-not-full: 1
----
-graph LR
-
-e(((e)))
-a(((a)))
-b((b))
-ba(((ba)))
-bab(((bab)))
-
-e --> |a| a
-e --> |b| b
-b --> |a| ba
-ba --> |b| bab
-
-#!mermaid
-
----
 title: q-03-b
 not-full: 1
 ---
@@ -202,7 +183,6 @@ a0(((a0)))
 a((a))
 b((b))
 aa((aa))
-ab(((ab)))
 ba(((ba)))
 
 a0 --> |a| a
@@ -211,9 +191,7 @@ a0 --> |b| b
 a  --> |a| aa
 aa --> |a,b| aa
 
-a --> |b| ab
-ab --> |a| a
-ab --> |b| b
+a --> |b| a0
 
 b --> |a| ba
 b --> |b| a0
