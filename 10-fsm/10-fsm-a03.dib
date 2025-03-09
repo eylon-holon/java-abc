@@ -106,7 +106,9 @@ title: q-06
 graph LR
 q0((q0))
 q1(((q1)))
-q0 -->|a| q1
+q0 -->|b| q1
+q0 -->|a| q0
+q1 -->|a,b| q1
 
 #!mermaid
 
