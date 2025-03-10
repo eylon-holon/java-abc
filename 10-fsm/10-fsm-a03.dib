@@ -92,7 +92,7 @@ q3 -->|e,b|q2
 q3 -->|a|q4
 q4 -->|a,e|q2
 q4 -->|b|q5
-q5 --?|a,e,b|q2
+q5 -->|a,e,b|q2
 
 #!mermaid
 
