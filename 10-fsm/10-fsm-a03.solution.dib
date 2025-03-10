@@ -67,7 +67,7 @@ q2  --> |0,3,6,9| q2
 #!mermaid
 
 ---
-title: a^n-b^n-a
+title: a^n-b^m-a
 not-full: 1
 ---
 graph LR
@@ -84,7 +84,7 @@ b --> |b| b
 #!mermaid
 
 ---
-title: a^n-b^n-b
+title: a^n-b^m-b
 not-full: 1
 ---
 graph LR
