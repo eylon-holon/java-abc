@@ -67,7 +67,7 @@ q2  --> |0,3,6,9| q2
 #!mermaid
 
 ---
-title: a^n-b^n-a
+title: a^n-b^m-a
 not-full: 1
 ---
 graph LR
@@ -84,7 +84,7 @@ b --> |b| b
 #!mermaid
 
 ---
-title: a^n-b^n-b
+title: a^n-b^m-b
 not-full: 1
 ---
 graph LR
@@ -97,25 +97,6 @@ e --> |a| a
 a --> |a| a
 a --> |b| b
 b --> |b| b
-
-#!mermaid
-
----
-title: q-03-a
-not-full: 1
----
-graph LR
-
-e(((e)))
-a(((a)))
-b((b))
-ba(((ba)))
-bab(((bab)))
-
-e --> |a| a
-e --> |b| b
-b --> |a| ba
-ba --> |b| bab
 
 #!mermaid
 
@@ -202,7 +183,6 @@ a0(((a0)))
 a((a))
 b((b))
 aa((aa))
-ab(((ab)))
 ba(((ba)))
 
 a0 --> |a| a
@@ -211,9 +191,7 @@ a0 --> |b| b
 a  --> |a| aa
 aa --> |a,b| aa
 
-a --> |b| ab
-ab --> |a| a
-ab --> |b| b
+a --> |b| a0
 
 b --> |a| ba
 b --> |b| a0
