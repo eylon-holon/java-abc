@@ -63,6 +63,7 @@ Person-1.name --> String-1
 
 subgraph String-1
     String-1.name('Shaked')
+    style String-1 fill:#eafaf1
 end
 
 subgraph Person-1
@@ -91,6 +92,7 @@ Person-1.name --> String-1
 
 subgraph String-1
     String-1.name('Shaked')
+    style String-1 fill:#eafaf1
 end
 
 subgraph Person-1
@@ -129,4 +131,5 @@ end
 
 subgraph String-1
     String-1.name('Shaked')
+    style String-1 fill:#eafaf1
 end
