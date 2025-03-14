@@ -100,7 +100,7 @@ class JavaUtils {
         }
     }
 
-    public static String submit(String page, String msg, boolean trace) {
+    public static String submit(String page, String why, boolean trace) {
         var url = Config.api;
         var docId = Config.docId;
         var branch = getCurrentBranch();
@@ -128,15 +128,18 @@ class JavaUtils {
             .replace("$SHEET$", "Submit")
             .replace("$BRANCH$", branch)
             .replace("$LESSON$", page)
-            .replace("$FNAME$", "ok")
-            .replace("$LOG$", msg);
+            .replace("$FNAME$", "")
+            .replace("$LOG$", why);
 
         var response = post(url, body);
 
         if (trace)
             print(response);
 
-        return "'" + page + "' is submitted to Gosha. Great job! 👍";
+        var reason = why != "" ? why : "If it is a re-submit, please specify why";
+        var say = String.format("'%s' is submitted to Gosha (%s). Great job! 👍", page, reason);
+
+        return say;
     }
 
     public static String submit(String page, String msg) {
