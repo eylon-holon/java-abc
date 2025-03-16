@@ -19,6 +19,7 @@ q1-->|0,1| q1
 ---
 title: q-02
 ---
+Noa: knows how to follow 
 
 #!mermaid
 
@@ -47,7 +48,7 @@ title: q-04
 graph LR
 q0((q0))
 q1(((q1)))
-q0-->|a,b|q0
+q0-->|a|q0
 q0-->|b| q1
 q1-->|a,b| q1
 
