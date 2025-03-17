@@ -69,10 +69,32 @@ title: q-04
 graph LR
 q0((q0))
 q1(((q1)))
+q2((q2))
 
 q0 --> |a| q0
 q0 --> |b| q1
-q1 --> |a,b| q1
+q1 --> |a| q2
+q1 --> |b| q1
+q2 --> |a,b| q2
+
+#!mermaid
+
+---
+title: q-09
+---
+graph LR
+q0((q0))
+q1(((q1)))
+q2(((q2)))
+q3((q3))
+
+q0 --> |a| q1
+q0 --> |b| q3
+q1 --> |a| q1
+q1 --> |b| q2
+q2 --> |a| q3
+q2 --> |b| q2
+q3 --> |a,b| q3
 
 #!mermaid
 
@@ -80,22 +102,22 @@ q1 --> |a,b| q1
 title: q-05
 ---
 graph LR
-q0((q0))
+q0(((q0)))
 q1(((q1)))
 q2((q2))
 q3((q3))
 q4(((q4)))
 q5(((q5)))
 
-q0 --> |e,a| q1
+q0 --> |a| q1
 q0 --> |b| q3
-q1 -.-> |a,e,b| q2
-q2 -.-> |a,e,b| q2
+q1 -.-> |a,b| q2
+q2 -.-> |a,b| q2
 q3 --> |a| q4
-q3 -.-> |e,b| q2
+q3 -.-> |b| q2
 q4 --> |b| q5
-q4 -.-> |a,e| q2
-q5 -.-> |a,e,b| q2
+q4 -.-> |a| q2
+q5 -.-> |a,b| q2
 
 #!mermaid
 
@@ -103,7 +125,7 @@ q5 -.-> |a,e,b| q2
 title: q-06
 ---
 graph LR
-q0((q0))
+q0(((q0)))
 q1((q1))
 q2((q2))
 q3((q3))
@@ -128,6 +150,25 @@ q5 --> |b| q2
 title: q-07
 ---
 graph LR
+q0(((q0)))
+q1((q1))
+q2(((q2)))
+q3((q3))
+q4((q4))
+q5(((q5)))
+q6((q6))
+
+q0 --> |a| q1
+q0 -.-> |b| q6
+q1 --> |a| q3
+q1 --> |b| q2
+q2 -.-> |a,b| q6
+q3 --> |a| q0
+q3 --> |b| q4
+q4 -.-> |a| q6
+q4 --> |b| q5
+q5 -.-> |a,b| q6
+q6 -.-> |a,b| q6
 
 #!mermaid
 
