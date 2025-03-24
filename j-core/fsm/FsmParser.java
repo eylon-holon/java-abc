@@ -1,43 +1,53 @@
 import java.util.*;
 import java.util.regex.Pattern;
 
-class FsmParser {
-    private List<FSM.State> states = new ArrayList<>();
-    private Set<Character> alefBet = new HashSet<>();
-    private List<FSM.Rule> rules = new ArrayList<>();
+interface IFsmParser {
+    FSM.State[] getStates();
+    String[] getAlefBet();
+    FSM.Transition[] getTransitions();
+}
+
+class FsmParser implements IFsmParser {
+    protected List<FSM.State> states = new ArrayList<>();
+    protected Set<String> alefBet = new HashSet<>();
+    protected List<FSM.Transition> transitions = new ArrayList<>();
 
     public FSM.State[] getStates() {
         return states.toArray(FSM.State[]::new);
     }
 
-    public char[] getAlefBet() {
+    public String[] getAlefBet() {
         var count = alefBet.size();
-        var chars = new char[count];
+        var letters = new String[count];
         var i = 0;
-        for (var ch: alefBet)
-            chars[i++] = ch;
-        return chars;
+        for (var letter: alefBet)
+            letters[i++] = letter;
+        return letters;
     }
 
-    public FSM.Rule[] getRules() {
-        return rules.toArray(FSM.Rule[]::new);
+    public FSM.Transition[] getTransitions() {
+        return transitions.toArray(FSM.Transition[]::new);
     }
 
-    private static void print(String fmt, Object... args) {
+    protected static void print(String fmt, Object... args) {
         System.out.println(String.format(fmt, args));
     }
 
-    private static String removeSpaces(String ln) {
+    protected static String removeSpaces(String ln) {
         return ln.replaceAll("\\s","");
     }
 
-    private boolean itsAStateLine(String ln) {
+    protected boolean itsAComment(String ln) {
+        return ln.startsWith("%%");
+    }
+
+    protected boolean itsAStateLine(String ln) {
         ln = removeSpaces(ln);
         return
             ln.contains("((") && ln.contains("))");
     }
 
-    private boolean itsARuleLine(String ln) {
+    protected boolean itsATransitionLine(String ln) {
         ln = removeSpaces(ln);
 
         var hasArrow = 
@@ -51,14 +61,14 @@ class FsmParser {
         var hasTransitions = transitions.length == 3;
 
         if (!hasTransitions) {
-            print("WARN: '%s' is a rule without transitions (%d); skipped", ln, transitions.length);
+            print("WARN: '%s' is a transition without rules (%d); skipped", ln, transitions.length);
             return false;
         }
 
         return true;
     }
 
-    private static boolean parseOk(String def) {
+    protected static boolean parseOk(String def) {
         if (def.contains("(((") && def.contains(")))"))
             return true;
 
@@ -68,14 +78,14 @@ class FsmParser {
         return false;
     }
 
-    private static boolean parseStart(String def) {
+    protected static boolean parseStart(String def) {
         if (def.contains(":::start"))
             return true;
 
         return false;
     }
 
-    private FSM.State parseState(String def) {
+    protected FSM.State parseState(String def) {
         var id = states.size();
         var name = def.split(Pattern.quote("(("))[0];
         var ok = parseOk(def);
@@ -88,7 +98,7 @@ class FsmParser {
         return new FSM.State(id, name, ok);
     }
 
-    private void parseStates(String ln, boolean log) {
+    protected void parseStates(String ln, boolean log) {
         ln = removeSpaces(ln);
         var defs = ln.split(";");
 
@@ -103,7 +113,9 @@ class FsmParser {
         }
     }
 
-    private FSM.State getState(String name) {
+    protected FSM.State getState(String name) {
+        name = name.trim();
+        
         for (var state: states) {
             if (state.name.equals(name))
                 return state;
@@ -111,7 +123,7 @@ class FsmParser {
         return null;
     }
 
-    private FSM.State[] parseFromStates(String ln) {
+    protected FSM.State[] parseFromStates(String ln) {
         var lhs = ln.contains("-") ? 
             ln.split("-")[0] : 
             ln.split("=")[0];
@@ -123,7 +135,7 @@ class FsmParser {
             var state = getState(name);
 
             if (state == null) {
-                print("ERROR: rule '%s': from state '%s' is not defined", ln, name);
+                print("ERROR: transition '%s': from state '%s' is not defined", ln, name);
                 continue;
             }
 
@@ -133,64 +145,68 @@ class FsmParser {
         return states.toArray(FSM.State[]::new);
     }
 
-    private FSM.State parseToState(String ln) {
+    protected FSM.State parseToState(String ln) {
         var parts = ln.split(Pattern.quote("|"));
         var name = parts[parts.length-1];
 
         var state = getState(name);
 
         if (state == null)
-            print("ERROR: rule '%s': to state '%s' is not defined", ln, name);
+            print("ERROR: transition '%s': to state '%s' is not defined", ln, name);
 
         return state;
     }
 
-    private char[] parseTransitions(String ln) {
+    protected String[] parseRules(String ln) {
         var split = ln.split(Pattern.quote("|"));
         var letters = split[1].split(",");
 
-        var chars = new char[letters.length];
+        var rules = new String[letters.length];
 
         for (int i = 0; i < letters.length; i++) {
             var letter = letters[i];
 
             if (letter.length() > 1)
-                print("WARN: '%s' has a letter '%s' which is not a single character", ln, letter);
+                print("ERROR: currently only single letters are supported in alef-bet (%s)", ln);
 
-            var ch = letter.charAt(0);
-
-            chars[i] = ch;
-            alefBet.add(ch);
+            rules[i] = letter;
+            alefBet.add(letter);
         }
 
-        return chars;
+        return rules;
     }
 
-    private void parseRule(String ln, boolean log) {
+    protected void parseTransition(String ln, boolean log) {
         ln = removeSpaces(ln);
 
         var froms = parseFromStates(ln);
         var to = parseToState(ln);
-        var chars = parseTransitions(ln);
+        var rules = parseRules(ln);
 
         if (froms.length == 0 || to == null)
             return;
 
         for (var from: froms) {
-            if (log) print("rule: %s -> %s %s", from.name, to.name, Arrays.toString(chars));
+            if (log) print("transition: %s -> %s %s", from.name, to.name, Arrays.toString(rules));
         
-            var rule = new FSM.Rule(from, to, chars);
-            rules.add(rule);
+            var transition = new FSM.Transition(from, to, rules);
+            transitions.add(transition);
         }
+    }
+
+    protected FsmParser() {
     }
 
     public FsmParser(String[] graph, boolean log) {
         for (var ln: graph) {
+            if (itsAComment(ln))
+                continue;
+            else
             if (itsAStateLine(ln))
                 parseStates(ln, log);
             else
-            if (itsARuleLine(ln))
-                parseRule(ln, log);
+            if (itsATransitionLine(ln))
+                parseTransition(ln, log);
         }
-    }    
+    }
 }
