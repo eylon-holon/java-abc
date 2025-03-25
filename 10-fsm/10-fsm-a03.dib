@@ -71,18 +71,15 @@ q2-->|2,5,8|q1
 title: q-04
 ---
 graph LR
-graph LR 
+
 q0((q0))
-q1((q1))
-q2(((q2)))
+q1(((q1)))
+
 n1((n1))
-q0-->|a,b|q1
-
-q1-->|a|q1
-q1-->|b|q2
-
-q2-->|b|q2
-q2-->|a|n1
+q0-->|a|q1
+q0-->|b|n1
+q1-->|a,b|q1
+n1-->|a,b|n1
 
 #!mermaid
 
