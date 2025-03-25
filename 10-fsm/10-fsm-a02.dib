@@ -148,15 +148,16 @@ title: Tet
 graph LR
 q0((Off)):::start; q1((Off)); q2((Off)); q3((Off)); q4(((On))):::ok;
 
-q0 ==>|1| q1
-q0 -.->|0| q0
-q1 ==>|0| q2
-q1 ==>|1| q0
-q2 ==>|1| q3
-q2 ==>|0| q0
-q3 ==>|1| q4
-q3 ==>|0| q0
-q4 -.->|0,1| q4
+q0 ==> |1| q1
+q1 ==> |0| q2
+q2 ==> |1| q3
+q3 ==> |1| q4
+
+q0 ==> |0| q0
+q1 ==> |1| q1
+q2 ==> |0| q0
+q3 ==> |0| q2
+q4 ==> |0,1| q4
 
 classDef start color:red
 classDef ok color:green
@@ -169,15 +170,17 @@ title: Yud
 graph LR
 q0((Off)):::start; q1((Off)); q2((Off)); q3((Off)); q4(((On))):::ok;
 
-q0 ==>|1| q1
-q0 -.->|0| q0
-q1 ==>|0| q2
-q1 ==>|1| q0
-q2 ==>|1| q3
-q2 ==>|0| q1
-q3 ==>|1| q4
-q3 ==>|0| q2
-q4 ==>|0,1| q0
+q0 ==> |1| q1
+q1 ==> |0| q2
+q2 ==> |1| q3
+q3 ==> |1| q4
+
+q0 ==> |0| q0
+q1 ==> |1| q1
+q2 ==> |0| q0
+q3 ==> |0| q2
+q4 ==> |0| q2
+q4 ==> |1| q1
 
 classDef start color:red
 classDef ok color:green
