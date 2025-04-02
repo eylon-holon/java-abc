@@ -1,0 +1,24 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!markdown
+
+![](img/img_00197.png)
+
+#!markdown
+
+![](img/img_00198.png)
+
+#!markdown
+
+???
+
+#!mermaid
+
+graph LR
+q0((q0))
+
+#!markdown
+
+![](img/img_00199.png)

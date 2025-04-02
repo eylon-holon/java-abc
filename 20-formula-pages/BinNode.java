@@ -9,7 +9,7 @@ public class BinNode<T> {
         this.right = null;
     }
 
-    public BinNode(BinNode<T> left, T value, BinNode<T> right) {
+    public BinNode(T value, BinNode<T> left, BinNode<T> right) {
         this.value = value;
         this.left = left;
         this.right = right;
