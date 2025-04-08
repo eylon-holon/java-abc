@@ -6,31 +6,48 @@
 
 |**linked list**| **רשימה מקושרת** |
 |---        |---            |
-| `boolean contains(Node<Integer> node, int num)` |  האם מספר נמצא בתוך הרשימה |
-| `int count(Node<String> node, int str)` | לספור מחרוזת מופאי של מחרוזת ברשימה |
-| `boolean prefix(Node<Integer> l1, Node<Integer> l2)` | לבדוק האם רשימה היא תת רשימה תחילית |
-| `boolean same(Node<Integer> l1, Node<Integer> l2)` | לבדוק האם שני רשימות זהות |
-| `boolean sameStudents(Node<Student> l1, Node<Student> l2)` | לבדוק האם שתי רשימות מכילות אותם תלמידים |
-| `Node<Integer> addToHead(Node<Integer> list, int num)` | הוסף לראש רשימה |
-| `Node<Integer> addToTail(Node<Integer> list, int num)` | הוספ לסוף רשימה |
-| `Node<Integer> addToOrdered(Node<Integer> list, int num)` | הוסף לרשימה ממויינת |
-| `Node<Integer> removeFromHead(Node<Integer> list)` | הורד מראש מסימה |
-| `Node<Integer> removeFromTail(Node<Integer> list)` | הורד מסוף רשימה |
-| `Node<Integer> removeOne(Node<Integer> list, int num)` | להסיר מספר אחד מרשימה |
-| `Node<Integer> removeAll(Node<Integer> list, int num)` | למצוא ולהסיר את כל מופעים של מספר |
-| `findByName(Node<Student> node, String name)` | לחפס בשם ברשימה |
-| - | - |
+| <l style="font-family:monospace"> int countNodes(Node<String> node) | כמות החוליות ברשימה |
+| <l style="font-family:monospace"> int countValue(Node<String> node, String str) | כמות פעמים שהערך מופיע ברשימה |
+| <l style="font-family:monospace"> boolean contains(Node node, int num) |  האם הערך נמצא בתוך הרשימה |
+| <l style="font-family:monospace"> boolean prefix(Node prefix, Node prefix) | לבדוק האם רשימה היא תת רשימה תחילית |
+| <l style="font-family:monospace"> int minValue(Node<String> node) | להחזיר ערך מינימלי |
+| <l style="font-family:monospace"> boolean sameValues(Node l1, Node l2) | לבדוק האם שני רשימות זהות |
+| <l style="font-family:monospace"> boolean sameStudents(Node<Student> l1, Node<Student> l2) | לבדוק האם שתי רשימות מכילות אותם תלמידים |
+| <l style="font-family:monospace"> Node addToHead(Node list, int num) | הוסף לראש רשימה |
+| <l style="font-family:monospace"> Node addToTail(Node list, int num) | הוספ לסוף רשימה |
+| <l style="font-family:monospace"> Node addToOrdered(Node list, int num) | הוסף לרשימה ממויינת |
+| <l style="font-family:monospace"> Node removeFromHead(Node list) | הורד מראש מסימה |
+| <l style="font-family:monospace"> Node removeFromTail(Node list) | הורד מסוף רשימה |
+| <l style="font-family:monospace"> Node removeOne(Node list, int num) | להסיר ערך אחד (הראשון שמופיע) מהרשימה |
+| <l style="font-family:monospace"> Node removeAll(Node list, int num) | למצוא ולהסיר את כל המופעים של הערך |
+| <l style="font-family:monospace"> Node findByName(Node node, String name) | לחפס ברשימה לפי מחרוזת |
+
+#!markdown
+
 | **binary tree** | **עץ בינארי** |
-| `int count(BinNode<T> node)` | לספור חוליות |
-| `int count(BinNode<Integer> node, int num)` |  לספור חוליות המכילות מספר מסויים|
-| `int countLeaves(BinNode<Integer> node)` | לספור אלים |
-| `boolean contains(BinNode<Integer> node, int num)` | האם מספר נמצא בעץ |
-| `boolean prefix(BinNode<Integer> node, Node<Integer> list)` | האם רשימה היא תחילית של עץ |
-| `boolean prefix(BinNode<Character> node, String str)` | האם מחרוזת היא תחילית של עץ תווים |
-| `boolean same(BinNode<Integer> l1, BinNode<Integer> l2)` | האם שני עצים זהים |
-| `int depth(BinNode<Integer> node)` | לחשב את עומק העץ |
-| `int findMinPath(BinNode<Integer> node)` | למצוא מסלול עם סכום מספרים מינימלי |
-| `int findMaxPath(BinNode<Integer> node)` | למצוא מסלול עם סכום מספרים מקסימלי |
-| `boolean isBalanced(BinNode<T> node)` | האם עץ מאוזן |
-| `` |  |
-| `` |  |
+|---        |---            |
+| <l style="font-family:monospace"> int countNodes(BinNode<T> node) | כמות החוליות בעץ |
+| <l style="font-family:monospace"> int countValue(BinNode node, int num) |  לספור חוליות המכילות ערך מסויים|
+| <l style="font-family:monospace"> int countLeaves(BinNode node) | לספור עלים |
+| <l style="font-family:monospace"> boolean contains(BinNode node, int num) | האם מספר הערך בעץ |
+| <l style="font-family:monospace"> boolean prefix(BinNode node, Node list) | האם רשימה היא תחילית של עץ |
+| <l style="font-family:monospace"> boolean prefix(BinNode<Character> node, String str) | האם מחרוזת היא תחילית של עץ תווים |
+| <l style="font-family:monospace"> boolean sameValues(BinNode l1, BinNode l2) | האם שני עצים זהים |
+| <l style="font-family:monospace"> int depth(BinNode node) | לחשב את עומק העץ |
+| <l style="font-family:monospace"> int findMinPath(BinNode node) | למצוא מסלול עם סכום ערכים מינימלי |
+| <l style="font-family:monospace"> int findMaxPath(BinNode node) | למצוא מסלול עם סכום ערכים מקסימלי |
+| <l style="font-family:monospace"> boolean isBalanced(BinNode<T> node) | האם עץ מאוזן |
+| <l style="font-family:monospace"> void printInOrder(BinNode<Integer> node) |  |
+| <l style="font-family:monospace"> void printPreOrder(BinNode<Integer> node) |  |
+| <l style="font-family:monospace"> void printPostOrder(BinNode<Integer> node) |  |
+| <l style="font-family:monospace"> void printByLevels(BinNode<Integer> node) | להדפיס לפי רמות |
+
+#!markdown
+
+| **array** | **מערך** |
+|---        |---            |
+| <l style="font-family:monospace"> boolean isPalindrom(int[] arr) |  |
+| <l style="font-family:monospace"> boolean startsWith(int[] prefix, int[] arr) |  |
+| <l style="font-family:monospace"> boolean endsWith(int[] suffix, int[] arr) |  |
+| <l style="font-family:monospace"> int[] countFrequences(int[] arr) |  |
+| <l style="font-family:monospace"> boolean isSorted(int[] arr) |  |
