@@ -6,6 +6,7 @@
 
 ---
 title: Q-01
+with-stack: 
 ---
 graph LR
 
@@ -13,8 +14,18 @@ graph LR
 
 ---
 title: Q-02
+with-stack: ┴
 ---
 graph LR
+q0(((q0)))
+q1((q1))
+q2((q2))
+q3(((q3)))
+q0 --> |"a ┴|push SAA"| q1
+q1 --> |"b A|pop A"| q2
+q1 --> |"a A|push AAA"| q1
+q2 --> |"b A|pop A"| q2
+q2 --> |"b S|pop S"| q3
 
 #!mermaid
 

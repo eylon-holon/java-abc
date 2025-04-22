@@ -8,7 +8,7 @@
 title: Q-01
 with-stack: ┴
 not-full: 1
-trace: 0
+trace: 1
 ---
 graph LR
 
