@@ -47,4 +47,21 @@ class Helpers {
         sb.append("]");
         return sb.toString();
     }
+
+    public static String node2str(BinNode<Integer> node) {
+        String l = node.hasLeft() ? Integer.toString(node.getLeft().getValue()) : "null";
+        String r = node.hasRight() ? Integer.toString(node.getRight().getValue()) : "null";
+        String children = node.hasLeft() || node.hasRight() ? String.format("[%s %s]", l, r) : "X";
+        String me = Integer.toString(node.getValue());
+        return String.format("%s --> %s", me, children);
+    }
+
+    public static void print3(BinNode<Integer> node) {
+        if (node == null) {
+            return;
+        }
+        System.out.println(node2str(node));
+        print3(node.getLeft());
+        print3(node.getRight());
+    }
 }
