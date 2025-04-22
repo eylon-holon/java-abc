@@ -5,7 +5,7 @@
 #!mermaid
 
 ---
-title: q-01
+title: q-010
 ---
 
 graph LR
@@ -205,3 +205,16 @@ q3 -->|a| q4
 q4 -->|a| q2
 q4 -->|b| q3
 q2 -->|b,a| q2
+
+#!mermaid
+
+---
+title: q-01
+---
+graph LR
+q1((q1))
+q2(((q2)))
+
+q1 --> |0,1| q1  
+q1 --> |c| q2
+q2 --> |0,1| q2
