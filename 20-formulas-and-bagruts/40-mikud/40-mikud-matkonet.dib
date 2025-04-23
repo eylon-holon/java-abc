@@ -1,0 +1,29 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!mermaid
+
+---
+title: q-01
+not-full: true
+with-stack: ┴
+---
+graph LR
+
+q00((q00))
+q01((q01))
+q10((q10))
+q11((q11))
+q20((q20))
+q21((q21))
+q30((q30))
+q40(((q40)))
+
+q00 --> |"0 ┴|push S"| q01
+
+q01 --> |"0 S|push K
+          0 K|push K"| q01
+
+q01 --> |"1 K|push M"| q10
+q10 --> |"1 M|push M"| q10
