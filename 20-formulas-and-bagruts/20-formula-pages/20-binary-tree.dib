@@ -1,0 +1,27 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!mermaid
+
+graph TB;
+A1((19))---B1((17))
+A1---B2((15))
+B1---C1((13))
+B1---C2((12))
+B2~~~x1:::x
+B2---C3((14))
+C1---D1((11))
+C1~~~x2:::x
+C2---D2((23))
+C2---D3((10))
+C3~~~x3:::x
+C3---D5((18))
+
+classDef x display: none;
+
+#!markdown
+
+$Pre \ order: \ [19, 17, 13, 11, 12, 23, 10, 15, 14, 18]$  
+$In \ order: \ \ \ [11, 13, 17, 23, 12, 10, 19, 15, 14, 18]$  
+$Post \ order: [11, 13, 23, 10, 12, 17, 18, 14, 15, 19]$  
