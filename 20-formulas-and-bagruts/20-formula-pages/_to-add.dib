@@ -1,0 +1,15 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!markdown
+
+- טבלת מעקב אחרי שימוש ברקורסיה לב דווקה בעצים
+- צורך בתעוד
+- תעוד במודלים
+- this.property - to distinguish variables and properties
+- String.indexOf(...)
+- Modelim: push, lalash, pop, 
+- Modelim: multiple letters in a single push
+- Turing: $a^n b^n c^n$ 
+- Turing: input can be replayced, no need to preserve it
