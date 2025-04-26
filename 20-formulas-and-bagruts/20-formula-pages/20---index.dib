@@ -4,6 +4,19 @@
 
 #!markdown
 
+**כל פונקצית עזר מדף הזה חייבת להיות מתועדת בבחינה**  
+// _פונקצית עזר_  
+// _הפונקציה עושה... הסבר קצר_  
+// _הפונקציה מקבלת... רשיצה של פרמטרים_  
+// _הפונקציה מחזירה... תיאור ערך המוחזר_ 
+
+#!markdown
+
+תעוד מיותר: ~~מוסיפים אחד למשתנה~~  
+תעוד רעוי: _עכשיו מחפסים מינימום במערך_
+
+#!markdown
+
 |**linked list**| **רשימה מקושרת** |
 |---        |---            |
 | <l style="font-family:monospace"> int countNodes(Node node) | כמות החוליות ברשימה |
@@ -62,8 +75,9 @@
 
 | **Queue** | **תור** |
 |---        |---            |
-| <l style="font-family:monospace"> void printQueue(BinNode node) | להדפיס ערכי של תור |
-| <l style="font-family:monospace"> boolean contains(BinNode node, int value) | לבדוק האם מספר נמצא בתוך תור <br> התור המקורי נשמר |
-| <l style="font-family:monospace"> int atIndex(Queue que, int index) | להחזיר עיבר במקום מסויים |
-| <l style="font-family:monospace"> int copy(Queue que) | לצור העתק של תור |
-| <l style="font-family:monospace"> int merge(Queue que1, Queue que2) | למזג שני תורים לתור חדש |
+| <l style="font-family:monospace"> int size(Queue\<T\> node) | כמות עברים בתור |
+| <l style="font-family:monospace"> void printQueue(Queue que) | להדפיס ערכי של תור |
+| <l style="font-family:monospace"> boolean contains(Queue que, int value) | לבדוק האם מספר נמצא בתוך תור <br> התור המקורי נשמר |
+| <l style="font-family:monospace"> T atIndex(Queue\<T\> que, int index) | להחזיר עיבר במקום מסויים |
+| <l style="font-family:monospace"> Queue\<T\> copy(Queue\<T\> que) | לצור העתק של תור |
+| <l style="font-family:monospace"> Queue\<T\> merge(Queue\<T\> que1, Queue\<T\> que2) | למזג שני תורים לתור חדש |
