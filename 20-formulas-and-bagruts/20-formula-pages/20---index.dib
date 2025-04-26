@@ -17,6 +17,10 @@
 
 #!markdown
 
+[🎦 הסבר על דפי נוסחאות](https://youtu.be/dxMmENP90CA)
+
+#!markdown
+
 |**linked list**| **רשימה מקושרת** |
 |---        |---            |
 | <l style="font-family:monospace"> int countNodes(Node node) | כמות החוליות ברשימה |
