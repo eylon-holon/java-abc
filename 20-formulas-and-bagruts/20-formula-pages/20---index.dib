@@ -4,15 +4,32 @@
 
 #!markdown
 
+**כל פונקצית עזר מדף הזה חייבת להיות מתועדת בבחינה**  
+// _פונקצית עזר_  
+// _הפונקציה עושה... הסבר קצר_  
+// _הפונקציה מקבלת... רשיצה של פרמטרים_  
+// _הפונקציה מחזירה... תיאור ערך המוחזר_ 
+
+#!markdown
+
+תעוד מיותר: ~~מוסיפים אחד למשתנה~~  
+תעוד רעוי: _עכשיו מחפסים מינימום במערך_
+
+#!markdown
+
+[🎦 הסבר על דפי נוסחאות](https://youtu.be/dxMmENP90CA)
+
+#!markdown
+
 |**linked list**| **רשימה מקושרת** |
 |---        |---            |
-| <l style="font-family:monospace"> int countNodes(Node<String> node) | כמות החוליות ברשימה |
-| <l style="font-family:monospace"> int countValue(Node<String> node, String str) | כמות פעמים שהערך מופיע ברשימה |
+| <l style="font-family:monospace"> int countNodes(Node node) | כמות החוליות ברשימה |
+| <l style="font-family:monospace"> int countValue(Node\<String\> node, String str) | כמות פעמים שהערך מופיע ברשימה |
 | <l style="font-family:monospace"> boolean contains(Node node, int num) |  האם הערך נמצא בתוך הרשימה |
 | <l style="font-family:monospace"> boolean prefix(Node prefix, Node prefix) | לבדוק האם רשימה היא תת רשימה תחילית |
-| <l style="font-family:monospace"> int minValue(Node<String> node) | להחזיר ערך מינימלי |
+| <l style="font-family:monospace"> int minValue(Node node) | להחזיר ערך מינימלי |
 | <l style="font-family:monospace"> boolean sameValues(Node l1, Node l2) | לבדוק האם שני רשימות זהות |
-| <l style="font-family:monospace"> boolean sameStudents(Node<Student> l1, Node<Student> l2) | לבדוק האם שתי רשימות מכילות אותם תלמידים |
+| <l style="font-family:monospace"> boolean sameStudents(Node\<Student\> l1, Node\<Student\> l2) | לבדוק האם שתי רשימות מכילות אותם תלמידים |
 | <l style="font-family:monospace"> Node addToHead(Node list, int num) | הוסף לראש רשימה |
 | <l style="font-family:monospace"> Node addToTail(Node list, int num) | הוספ לסוף רשימה |
 | <l style="font-family:monospace"> Node addToOrdered(Node list, int num) | הוסף לרשימה ממויינת |
@@ -21,12 +38,16 @@
 | <l style="font-family:monospace"> Node removeOne(Node list, int num) | להסיר ערך אחד (הראשון שמופיע) מהרשימה |
 | <l style="font-family:monospace"> Node removeAll(Node list, int num) | למצוא ולהסיר את כל המופעים של הערך |
 | <l style="font-family:monospace"> Node findByName(Node node, String name) | לחפס ברשימה לפי מחרוזת |
+| <l style="font-family:monospace"> Node atIndex(Node node, int index) | להחזיר חוליה במיקום מסויים |
+| <l style="font-family:monospace"> Node copy(Node list) | לצור העתק של רשימה נתונה |
+| <l style="font-family:monospace"> Node\<Integer\> fromArray(int[] arr) |  |
+| <l style="font-family:monospace"> Node\<T\> fromQueue(Queue\<T\> que) |  |
 
 #!markdown
 
 | **binary tree** | **עץ בינארי** |
 |---        |---            |
-| <l style="font-family:monospace"> int countNodes(BinNode<T> node) | כמות החוליות בעץ |
+| <l style="font-family:monospace"> int countNodes(BinNode\<T\> node) | כמות החוליות בעץ |
 | <l style="font-family:monospace"> int countValue(BinNode node, int num) |  לספור חוליות המכילות ערך מסויים|
 | <l style="font-family:monospace"> int countLeaves(BinNode node) | לספור עלים |
 | <l style="font-family:monospace"> boolean contains(BinNode node, int num) | האם מספר הערך בעץ |
@@ -41,6 +62,7 @@
 | <l style="font-family:monospace"> void printPreOrder(BinNode<Integer> node) |  |
 | <l style="font-family:monospace"> void printPostOrder(BinNode<Integer> node) |  |
 | <l style="font-family:monospace"> void printByLevels(BinNode<Integer> node) | להדפיס לפי רמות |
+| <l style="font-family:monospace"> BinNode\<T\> copy(BinNode\<T\> node) | לצור העתק חדש |
 
 #!markdown
 
@@ -51,3 +73,15 @@
 | <l style="font-family:monospace"> boolean endsWith(int[] suffix, int[] arr) |  |
 | <l style="font-family:monospace"> int[] countFrequences(int[] arr) |  |
 | <l style="font-family:monospace"> boolean isSorted(int[] arr) |  |
+| <l style="font-family:monospace"> int[] merge(int[] a, int[] b) | למזג שני מערכים ממויינים |
+
+#!markdown
+
+| **Queue** | **תור** |
+|---        |---            |
+| <l style="font-family:monospace"> int size(Queue\<T\> node) | כמות עברים בתור |
+| <l style="font-family:monospace"> void printQueue(Queue que) | להדפיס ערכי של תור |
+| <l style="font-family:monospace"> boolean contains(Queue que, int value) | לבדוק האם מספר נמצא בתוך תור <br> התור המקורי נשמר |
+| <l style="font-family:monospace"> T atIndex(Queue\<T\> que, int index) | להחזיר עיבר במקום מסויים |
+| <l style="font-family:monospace"> Queue\<T\> copy(Queue\<T\> que) | לצור העתק של תור |
+| <l style="font-family:monospace"> Queue\<T\> merge(Queue\<T\> que1, Queue\<T\> que2) | למזג שני תורים לתור חדש |
