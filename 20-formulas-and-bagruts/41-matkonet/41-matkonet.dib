@@ -5,7 +5,7 @@
 #!mermaid
 
 ---
-title: q-04
+title: q4-a
 with-stack: ┴
 not-full: true
 ---
@@ -43,8 +43,58 @@ q6 --> |"0 A|pop A"| q6
 #!mermaid
 
 ---
-title: q-05-3
-with-stack: ┴
+title: q5-3
 not-full: true
 ---
 graph LR
+
+a0(((a0)))
+ccc(((ccc)))
+c((c))
+cc((cc))
+cb(((cb)))
+cbb((cbb))
+cbbb((cbbb))
+ccb((ccb))
+ccbb(((ccbb)))
+ccbbb((ccbbb))
+ccbb(((ccbb)))
+cccb((cccb))
+cccbb((cccbb))
+cccbb((cccbb))
+
+a0 --> |a| a0
+a0 --> |c| c
+c --> |c| cc
+cc --> |c| ccc
+ccc --> |c| c
+c --> |b| cb
+cb --> |b| cbb
+cbb --> |b| cbbb
+cbbb --> |b| cb
+cc --> |b| ccb
+ccb --> |b| ccbb
+ccbb --> |b| ccbbb
+ccbbb --> |b| ccb
+ccc --> |b| cccb
+cccb --> |b| cccbb
+cccbb --> |b| ccc
+
+#!mermaid
+
+---
+title: q5-4
+not-full: true
+---
+graph LR
+
+q0(((start)))
+a0((a0))
+b1((b1))
+b0(((b0)))
+
+q0 --> |a| a0
+a0 --> |b| q0
+q0 --> |b| b1
+b1 --> |b| b0
+b0 --> |b| b1
