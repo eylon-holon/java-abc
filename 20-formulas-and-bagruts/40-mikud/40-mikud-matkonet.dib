@@ -1,0 +1,105 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!mermaid
+
+---
+title: q-01
+not-full: true
+with-stack: ┴
+---
+graph LR
+q0((a-even))
+q1((a-odd))
+q2((b-any))
+ok(((ok)))
+
+q0 --> |"a ┴|push A
+         a A|push A"| q1
+q1 --> |"a A|push A"| q0
+q0 --> |"b ┴|nop"| ok
+q0 --> |"b A|pop A"| q2
+q2 --> |"b A|pop A"| q2
+q2 --> |"b ┴|nop"| ok
+
+#!mermaid
+
+---
+title: q-02
+with-stack: ┴
+not-full: true
+---
+graph LR
+
+st((start))
+q0((q0\na^k))
+q1((q1\nc-1))
+q2((q3\nb^k-1))
+ok(((end)))
+
+st --> |"a ┴|nop"| q0
+q0 --> |"a ┴|push A
+         a A|push A"| q0
+q0 --> |"c A|pop A"| q1
+q0 --> |"c ┴|nop"| ok
+q1 --> |"b ┴|nop"| ok
+q1 --> |"b A|pop A"| q2
+q2 --> |"b ┴|nop"| ok
+q2 --> |"b A|pop A"| q2
+
+#!mermaid
+
+---
+title: q-03
+not-full: true
+---
+graph LR
+
+q0((q0))
+q1((q1\na-odd))
+q2(((q2\na-even)))
+q3((q3\nb-odd))
+q4(((q4\nb-even)))
+q5(((q5\nb-odd)))
+q6((q6\nb-even))
+
+q0 --> |a| q1
+q1 --> |a| q2
+q2 --> |a| q1
+q2 --> |b| q3
+q3 --> |b| q4
+q4 --> |b| q3
+
+q1 --> |b| q5
+q5 --> |b| q6
+q6 --> |b| q5
+
+#!mermaid
+
+---
+title: q-04
+with-stack: ┴
+not-full: true
+---
+graph LR
+
+st((start))
+q0((q0\na^x))
+q1((q1\nb^y))
+q2((q2\nc^y))
+q3((q3\nd^x))
+ok(((end)))
+
+st --> |"a ┴|nop"| q0
+q0 --> |"a X|push X
+         a ┴|push X"| q0
+q0 --> |"b ┴|push Y
+         b X|push Y"| q1
+q1 --> |"b Y|push Y"| q1
+q1 --> |"c Y|pop Y"| q2
+q2 --> |"c Y|pop Y"| q2
+q2 --> |"d X|pop X"| q3
+q2 --> |"d ┴|nop"| ok
+q3 --> |"d X|pop X"| q3
+q3 --> |"d ┴|nop"| ok
