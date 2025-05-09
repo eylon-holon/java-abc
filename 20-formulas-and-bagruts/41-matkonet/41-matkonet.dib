@@ -83,6 +83,33 @@ cccbb --> |b| ccc
 #!mermaid
 
 ---
+title: q5-3-2
+not-full: true
+---
+graph LR
+
+a0(((a0)))
+c((c))
+ok(((ok)))
+cc((cc))
+ccb((ccb))
+b1((b1))
+b2((b2))
+
+a0 --> |a| a0
+a0 --> |c| c
+c  --> |b| ok
+c -->  |c| cc
+cc --> |b| ccb
+cc --> |c| ok
+ccb --> |b| ok
+ok --> |b| b1
+b1 --> |b| b2
+b2 --> |b| ok
+
+#!mermaid
+
+---
 title: q5-4
 not-full: true
 ---
