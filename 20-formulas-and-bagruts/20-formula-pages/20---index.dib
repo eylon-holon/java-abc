@@ -17,6 +17,10 @@
 
 #!markdown
 
+[🎦 הסבר על דפי נוסחאות](https://youtu.be/dxMmENP90CA)
+
+#!markdown
+
 |**linked list**| **רשימה מקושרת** |
 |---        |---            |
 | <l style="font-family:monospace"> int countNodes(Node node) | כמות החוליות ברשימה |
@@ -38,6 +42,7 @@
 | <l style="font-family:monospace"> Node copy(Node list) | לצור העתק של רשימה נתונה |
 | <l style="font-family:monospace"> Node\<Integer\> fromArray(int[] arr) |  |
 | <l style="font-family:monospace"> Node\<T\> fromQueue(Queue\<T\> que) |  |
+| <l style="font-family:monospace"> int sumTill(Node<Integer> list, Node<Integer> last)) | סכום עד חוליה מסוימת |
 
 #!markdown
 
