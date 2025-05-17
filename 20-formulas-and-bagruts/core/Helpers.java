@@ -27,6 +27,14 @@ class Helpers {
         return head;
     }
 
+    public static Queue<Integer> queueFromArray(int[] values) {
+        var que = new Queue<Integer>();
+        for (var x: values) {
+            que.insert(x);
+        }
+        return que;
+    }
+
     public static <T> String toString(Node<T> node) {
         var sb = new StringBuilder();
         sb.append("[");
@@ -36,6 +44,25 @@ class Helpers {
                 sb.append(", ");
             }
             node = node.getNext();
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    public static <T> String toString(Queue<T> que) {
+        var sb = new StringBuilder();
+        sb.append("[");
+        var tmp = new Queue<T>();
+        while (!que.isEmpty()) {
+            var x = que.remove();
+            tmp.insert(x);
+            sb.append(x);
+            if (!que.isEmpty()) {
+                sb.append(", ");
+            }
+        }
+        while (!tmp.isEmpty()) {
+            que.insert(tmp.remove());
         }
         sb.append("]");
         return sb.toString();
