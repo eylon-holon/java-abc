@@ -42,22 +42,27 @@ not-full: true
 ---
 graph LR
 
-q0((a))
-q1((b))
-q2((Ac))
-q3((aC))
-q4(((end)))
+q0((q0))
+q1((q1))
+q2((q2))
+q4(((q4)))
+z2((z2))
 
-q0 --> |"a ┴|push SA
-         a A|push AA"| q0
+q0 --> |"a A|push AA
+         a ┴|push AA"| q0
 
-q0 --> |"b ┴|push A
-         b A|push A"| q1
+q1 --> |"b A|push A"| q1
 
-q1 --> |"a A|pop A"| q2
-q2 --> |"c A|pop A"| q1
+q0 --> |"b A|push A
+         b ┴|push A"| q1
+         
+z2 --> |"c A|nop"| q2
 
-q2 --> |"c S|pop S"| q4
+q1 --> |"a A|pop A"| z2
+
+z2 --> |"c ┴|nop"| q4
+
+q2 --> |"a A|pop A"| z2
 
 #!mermaid
 
