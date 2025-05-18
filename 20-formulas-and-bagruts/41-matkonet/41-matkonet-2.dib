@@ -32,3 +32,45 @@ D2~~~x2:::x
 D2---E1((11))
 
 classDef x display: none;
+
+#!mermaid
+
+---
+title: q3-a
+with-stack: ┴
+not-full: true
+---
+graph LR
+
+q0((a))
+q1((b))
+q2((Ac))
+q3((aC))
+q4(((end)))
+
+q0 --> |"a ┴|push SA
+         a A|push AA"| q0
+
+q0 --> |"b ┴|push A
+         b A|push A"| q1
+
+q1 --> |"a A|pop A"| q2
+q2 --> |"c A|pop A"| q1
+
+q2 --> |"c S|pop S"| q4
+
+#!mermaid
+
+---
+title: q4-b
+not-full: true
+---
+graph LR
+
+#!mermaid
+
+---
+title: q4-c
+not-full: true
+---
+graph LR
