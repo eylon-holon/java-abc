@@ -37,4 +37,8 @@ class Queue<T> {
 
         return value;
     }
+
+    public String toString() {
+        return Helpers.toString(this);
+    }
 }
