@@ -1,0 +1,22 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!mermaid
+
+graph TB;
+A1((_))---B1((_))
+A1---B2((_))
+B1~~~x1:::x
+B1---C2((_))
+B2---C1((_))
+B2---C3((_))
+C1~~~x2:::x
+C1---C4((_))
+C2~~~x4:::x
+C2---D3((_))
+C3~~~x5:::x
+C3---D5((_))
+
+classDef x display: none;
+%% graphName: containsPostOrder
